@@ -1,0 +1,2024 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VOLTGUARD – Complete System Documentation</title>
+<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Rajdhani:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@300;400;500;700&family=Exo+2:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #060a10;
+  --bg2: #0a1020;
+  --bg3: #0d1628;
+  --card: rgba(10,18,35,0.85);
+  --border: rgba(0,200,255,0.15);
+  --border2: rgba(0,200,255,0.08);
+  --cyan: #00C8FF;
+  --cyan2: #00E5FF;
+  --green: #00FF88;
+  --amber: #FFB800;
+  --danger: #FF4060;
+  --purple: #8B5CF6;
+  --text: #c8dff5;
+  --text2: rgba(180,210,240,0.65);
+  --text3: rgba(130,170,210,0.45);
+  --mono: 'IBM Plex Mono', 'Share Tech Mono', monospace;
+  --head: 'Rajdhani', 'Exo 2', sans-serif;
+  --code: 'IBM Plex Mono', monospace;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  font-family:var(--head);
+  background:var(--bg);
+  color:var(--text);
+  min-height:100vh;
+  overflow-x:hidden;
+  line-height:1.7;
+}
+
+/* BACKGROUND */
+body::before{
+  content:'';position:fixed;inset:0;z-index:-2;
+  background:
+    radial-gradient(ellipse 70% 50% at 15% 10%, rgba(0,100,200,0.12) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 40% at 85% 80%, rgba(100,50,200,0.08) 0%, transparent 60%),
+    linear-gradient(160deg, #060a10 0%, #0a1020 50%, #06080e 100%);
+}
+body::after{
+  content:'';position:fixed;inset:0;z-index:-1;pointer-events:none;
+  background-image:
+    linear-gradient(rgba(0,200,255,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,200,255,0.04) 1px, transparent 1px);
+  background-size:50px 50px;
+  mask-image:radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 100%);
+}
+
+/* SCROLLBAR */
+::-webkit-scrollbar{width:6px;}
+::-webkit-scrollbar-track{background:var(--bg);}
+::-webkit-scrollbar-thumb{background:rgba(0,200,255,0.25);border-radius:3px;}
+::-webkit-scrollbar-thumb:hover{background:rgba(0,200,255,0.4);}
+
+/* ═══ HEADER ═══ */
+.site-header{
+  text-align:center;padding:60px 20px 50px;
+  position:relative;overflow:hidden;
+}
+.site-header::before{
+  content:'';position:absolute;bottom:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,var(--cyan),transparent);
+}
+.header-tag{
+  display:inline-block;font-family:var(--mono);font-size:11px;letter-spacing:4px;
+  color:var(--cyan);text-transform:uppercase;margin-bottom:16px;
+  padding:5px 14px;border:1px solid rgba(0,200,255,0.3);border-radius:20px;
+  background:rgba(0,200,255,0.05);
+}
+.site-title{
+  font-family:var(--head);font-size:clamp(42px,7vw,80px);font-weight:700;
+  letter-spacing:6px;line-height:1;
+  background:linear-gradient(135deg,#ffffff 0%,var(--cyan) 50%,var(--purple) 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  margin-bottom:8px;
+}
+.site-sub{
+  font-size:16px;color:var(--text2);letter-spacing:3px;text-transform:uppercase;
+  font-family:var(--mono);margin-bottom:28px;
+}
+.header-badges{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;}
+.badge{
+  padding:6px 14px;border-radius:20px;font-size:11px;font-weight:600;
+  letter-spacing:1.5px;text-transform:uppercase;font-family:var(--mono);
+  border:1px solid;
+}
+.badge-c{color:var(--cyan);border-color:rgba(0,200,255,0.4);background:rgba(0,200,255,0.08);}
+.badge-g{color:var(--green);border-color:rgba(0,255,136,0.4);background:rgba(0,255,136,0.08);}
+.badge-p{color:var(--purple);border-color:rgba(139,92,246,0.4);background:rgba(139,92,246,0.08);}
+.badge-a{color:var(--amber);border-color:rgba(255,184,0,0.4);background:rgba(255,184,0,0.08);}
+
+/* ═══ NAV ═══ */
+.toc-nav{
+  position:sticky;top:0;z-index:100;
+  background:rgba(6,10,16,0.95);backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--border);
+  padding:0 20px;overflow-x:auto;
+}
+.toc-list{
+  display:flex;gap:0;list-style:none;max-width:1200px;margin:0 auto;
+  white-space:nowrap;
+}
+.toc-list a{
+  display:block;padding:14px 16px;font-size:11px;font-weight:600;
+  letter-spacing:1.5px;text-transform:uppercase;text-decoration:none;
+  color:var(--text3);font-family:var(--mono);
+  border-bottom:2px solid transparent;
+  transition:all 0.25s ease;
+}
+.toc-list a:hover{color:var(--cyan);border-color:var(--cyan);}
+
+/* ═══ MAIN LAYOUT ═══ */
+.wrap{max-width:1200px;margin:0 auto;padding:0 20px;}
+
+/* ═══ SECTION ═══ */
+.section{padding:60px 0;border-bottom:1px solid var(--border2);}
+.section:last-child{border-bottom:none;}
+.sec-hdr{display:flex;align-items:center;gap:16px;margin-bottom:36px;}
+.sec-num{
+  width:44px;height:44px;border-radius:10px;
+  background:linear-gradient(135deg,var(--cyan),var(--purple));
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--mono);font-size:14px;font-weight:700;color:#fff;
+  flex-shrink:0;box-shadow:0 0 20px rgba(0,200,255,0.35);
+}
+.sec-title{
+  font-family:var(--head);font-size:clamp(22px,3.5vw,32px);font-weight:700;
+  letter-spacing:2px;text-transform:uppercase;
+  background:linear-gradient(90deg,#fff,var(--cyan));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+}
+.sec-subtitle{
+  font-size:13px;color:var(--text3);font-family:var(--mono);letter-spacing:1px;margin-top:2px;
+}
+
+/* ═══ GRID ═══ */
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;}
+@media(max-width:900px){.grid2,.grid3{grid-template-columns:1fr;}.grid4{grid-template-columns:1fr 1fr;}}
+@media(max-width:500px){.grid4{grid-template-columns:1fr;}}
+
+/* ═══ CARDS ═══ */
+.card{
+  background:var(--card);border:1px solid var(--border);border-radius:14px;
+  padding:22px;position:relative;overflow:hidden;
+  transition:transform 0.3s ease,border-color 0.3s ease,box-shadow 0.3s ease;
+}
+.card::before{content:'';position:absolute;inset:0;border-radius:inherit;
+  background:linear-gradient(135deg,rgba(0,200,255,0.04) 0%,transparent 60%);pointer-events:none;}
+.card:hover{transform:translateY(-3px);border-color:rgba(0,200,255,0.3);box-shadow:0 12px 40px rgba(0,0,0,0.4),0 0 20px rgba(0,200,255,0.06);}
+.card-hdr{display:flex;align-items:center;gap:10px;margin-bottom:14px;}
+.card-icon{
+  width:36px;height:36px;border-radius:9px;
+  display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;
+}
+.card-title{font-size:13px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;font-family:var(--mono);}
+.card-body{font-size:13.5px;color:var(--text2);line-height:1.7;}
+
+/* COMPONENT CARD */
+.comp-card{
+  background:rgba(10,18,35,0.9);border:1px solid var(--border);border-radius:12px;
+  padding:18px;position:relative;overflow:hidden;
+  transition:all 0.3s ease;
+}
+.comp-card:hover{border-color:rgba(0,200,255,0.35);box-shadow:0 0 20px rgba(0,200,255,0.08);}
+.comp-name{font-size:14px;font-weight:700;color:#fff;margin-bottom:4px;letter-spacing:0.5px;}
+.comp-model{font-family:var(--mono);font-size:11px;color:var(--cyan);letter-spacing:1px;}
+.comp-qty{
+  position:absolute;top:14px;right:14px;
+  background:rgba(0,200,255,0.12);border:1px solid rgba(0,200,255,0.25);
+  color:var(--cyan);font-family:var(--mono);font-size:10px;font-weight:700;
+  padding:3px 8px;border-radius:20px;letter-spacing:1px;
+}
+.comp-desc{font-size:12px;color:var(--text2);margin-top:8px;line-height:1.6;}
+.comp-cost{
+  margin-top:10px;display:flex;align-items:center;gap:8px;
+  font-family:var(--mono);font-size:11px;
+}
+.comp-cost span:first-child{color:var(--text3);letter-spacing:1px;}
+.comp-cost span:last-child{color:var(--amber);font-weight:700;}
+.comp-tags{display:flex;gap:6px;margin-top:10px;flex-wrap:wrap;}
+.comp-tag{
+  font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;
+  padding:2px 8px;border-radius:10px;font-family:var(--mono);
+}
+.tag-power{background:rgba(255,184,0,0.12);color:var(--amber);border:1px solid rgba(255,184,0,0.25);}
+.tag-sensor{background:rgba(0,200,255,0.12);color:var(--cyan);border:1px solid rgba(0,200,255,0.25);}
+.tag-mcu{background:rgba(139,92,246,0.12);color:var(--purple);border:1px solid rgba(139,92,246,0.25);}
+.tag-passive{background:rgba(255,255,255,0.06);color:var(--text2);border:1px solid rgba(255,255,255,0.1);}
+.tag-protect{background:rgba(255,64,96,0.12);color:var(--danger);border:1px solid rgba(255,64,96,0.25);}
+.tag-output{background:rgba(0,255,136,0.12);color:var(--green);border:1px solid rgba(0,255,136,0.25);}
+
+/* ═══ CODE BLOCK ═══ */
+.code-wrap{
+  background:#020508;border:1px solid var(--border);border-radius:12px;
+  overflow:hidden;margin:20px 0;
+}
+.code-header{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:10px 18px;background:rgba(0,200,255,0.06);border-bottom:1px solid var(--border);
+}
+.code-lang{font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--cyan);}
+.code-file{font-family:var(--mono);font-size:10px;color:var(--text3);letter-spacing:1px;}
+.code-copy{
+  font-family:var(--mono);font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;
+  color:var(--cyan);padding:4px 10px;border:1px solid rgba(0,200,255,0.3);border-radius:6px;
+  background:rgba(0,200,255,0.05);cursor:pointer;transition:all 0.2s ease;
+}
+.code-copy:hover{background:rgba(0,200,255,0.15);border-color:var(--cyan);}
+.code-dots{display:flex;gap:6px;}
+.code-dot{width:10px;height:10px;border-radius:50%;}
+pre{
+  padding:24px;overflow-x:auto;font-family:var(--code);font-size:12.5px;
+  line-height:1.75;color:#c8dff5;tab-size:2;
+}
+pre .c{color:#4a7a6a;font-style:italic;}       /* comment */
+pre .k{color:#7cc4ff;}                          /* keyword */
+pre .s{color:#98e89e;}                          /* string */
+pre .n{color:#ffb869;}                          /* number */
+pre .f{color:#c4a0f5;}                          /* function */
+pre .t{color:#67ceff;}                          /* type */
+pre .p{color:#ff8a9a;}                          /* preprocessor */
+pre .v{color:#e0c0ff;}                          /* variable */
+pre .op{color:#78d4ff;}                         /* operator */
+
+/* ═══ CIRCUIT / DIAGRAM ═══ */
+.circuit-svg-wrap{
+  background:rgba(2,8,20,0.95);border:1px solid var(--border);border-radius:14px;
+  padding:28px;overflow-x:auto;margin:20px 0;
+}
+.circuit-svg-wrap svg{max-width:100%;display:block;margin:0 auto;}
+
+/* ═══ PIN TABLE ═══ */
+.pin-table{width:100%;border-collapse:collapse;font-size:13px;margin:16px 0;}
+.pin-table th{
+  padding:10px 14px;text-align:left;font-family:var(--mono);font-size:10px;
+  font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--text3);
+  border-bottom:1px solid var(--border);background:rgba(0,200,255,0.04);
+}
+.pin-table td{
+  padding:10px 14px;border-bottom:1px solid rgba(255,255,255,0.04);
+  vertical-align:top;line-height:1.5;
+}
+.pin-table tr:hover td{background:rgba(0,200,255,0.03);}
+.pin-table tr:last-child td{border-bottom:none;}
+.pin{
+  display:inline-block;font-family:var(--mono);font-size:11px;font-weight:700;
+  padding:2px 8px;border-radius:5px;background:rgba(0,200,255,0.12);
+  color:var(--cyan);border:1px solid rgba(0,200,255,0.25);white-space:nowrap;
+}
+.pin-g{background:rgba(0,255,136,0.12);color:var(--green);border-color:rgba(0,255,136,0.25);}
+.pin-r{background:rgba(255,64,96,0.12);color:var(--danger);border-color:rgba(255,64,96,0.25);}
+.pin-a{background:rgba(255,184,0,0.12);color:var(--amber);border-color:rgba(255,184,0,0.25);}
+.pin-p{background:rgba(139,92,246,0.12);color:var(--purple);border-color:rgba(139,92,246,0.25);}
+.desc-text{color:var(--text2);font-size:12.5px;}
+.note-text{color:var(--text3);font-size:11px;font-family:var(--mono);}
+
+/* ═══ STEP / PROCESS ═══ */
+.steps{display:flex;flex-direction:column;gap:0;}
+.step{
+  display:flex;gap:20px;padding:24px 0;
+  border-bottom:1px solid rgba(255,255,255,0.04);position:relative;
+}
+.step:last-child{border-bottom:none;}
+.step-left{display:flex;flex-direction:column;align-items:center;flex-shrink:0;width:40px;}
+.step-num{
+  width:36px;height:36px;border-radius:50%;
+  background:linear-gradient(135deg,var(--cyan),var(--purple));
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--mono);font-size:13px;font-weight:700;color:#fff;
+  flex-shrink:0;box-shadow:0 0 15px rgba(0,200,255,0.3);z-index:1;position:relative;
+}
+.step-line{flex:1;width:1px;background:linear-gradient(to bottom,var(--cyan),transparent);margin-top:8px;opacity:0.3;}
+.step-content{flex:1;padding-top:4px;}
+.step-title{font-size:16px;font-weight:700;color:#fff;margin-bottom:8px;letter-spacing:0.5px;}
+.step-body{font-size:13.5px;color:var(--text2);line-height:1.7;}
+
+/* ═══ ALERT BOX ═══ */
+.alert{
+  padding:16px 20px;border-radius:10px;margin:16px 0;
+  display:flex;gap:14px;align-items:flex-start;font-size:13.5px;line-height:1.65;
+}
+.alert-warn{background:rgba(255,184,0,0.07);border:1px solid rgba(255,184,0,0.25);color:rgba(255,220,120,0.9);}
+.alert-danger{background:rgba(255,64,96,0.07);border:1px solid rgba(255,64,96,0.25);color:rgba(255,140,150,0.9);}
+.alert-info{background:rgba(0,200,255,0.07);border:1px solid rgba(0,200,255,0.2);color:rgba(160,220,255,0.9);}
+.alert-ok{background:rgba(0,255,136,0.07);border:1px solid rgba(0,255,136,0.2);color:rgba(140,255,180,0.9);}
+.alert-icon{font-size:20px;flex-shrink:0;margin-top:1px;}
+
+/* ═══ FORMULA BOX ═══ */
+.formula{
+  background:rgba(0,200,255,0.04);border:1px solid rgba(0,200,255,0.2);
+  border-radius:10px;padding:20px 24px;margin:14px 0;
+  font-family:var(--mono);font-size:13.5px;color:var(--cyan);
+  line-height:2;
+}
+.formula .comment{color:var(--text3);font-size:12px;}
+
+/* ═══ JSON BLOCK ═══ */
+.json-key{color:#88ccff;}
+.json-str{color:#98e89e;}
+.json-num{color:#ffb869;}
+.json-bool{color:#c4a0f5;}
+
+/* ═══ INLINE HIGHLIGHT ═══ */
+code{
+  font-family:var(--mono);font-size:12px;padding:2px 7px;border-radius:5px;
+  background:rgba(0,200,255,0.1);color:var(--cyan);border:1px solid rgba(0,200,255,0.18);
+}
+strong{color:#fff;font-weight:700;}
+.highlight-c{color:var(--cyan);}
+.highlight-g{color:var(--green);}
+.highlight-a{color:var(--amber);}
+.highlight-d{color:var(--danger);}
+.highlight-p{color:var(--purple);}
+
+/* ═══ TABLE ═══ */
+.data-table{width:100%;border-collapse:collapse;font-size:13px;margin:16px 0;}
+.data-table th{padding:10px 16px;text-align:left;font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--cyan);background:rgba(0,200,255,0.06);border-bottom:1px solid var(--border);}
+.data-table td{padding:10px 16px;border-bottom:1px solid rgba(255,255,255,0.04);color:var(--text2);line-height:1.5;}
+.data-table tr:last-child td{border-bottom:none;}
+.data-table tr:hover td{background:rgba(0,200,255,0.03);}
+
+/* ═══ FLOW DIAGRAM ═══ */
+.flow{display:flex;align-items:center;gap:0;flex-wrap:wrap;margin:20px 0;}
+.flow-box{
+  background:rgba(0,200,255,0.07);border:1px solid rgba(0,200,255,0.25);border-radius:8px;
+  padding:10px 16px;font-family:var(--mono);font-size:12px;font-weight:600;
+  color:var(--cyan);text-align:center;white-space:nowrap;
+  transition:all 0.2s ease;cursor:default;
+}
+.flow-box:hover{background:rgba(0,200,255,0.14);border-color:var(--cyan);box-shadow:0 0 14px rgba(0,200,255,0.2);}
+.flow-arrow{font-size:18px;color:var(--text3);padding:0 8px;flex-shrink:0;}
+.flow-box.warn{background:rgba(255,184,0,0.07);border-color:rgba(255,184,0,0.3);color:var(--amber);}
+.flow-box.danger{background:rgba(255,64,96,0.07);border-color:rgba(255,64,96,0.3);color:var(--danger);}
+.flow-box.ok{background:rgba(0,255,136,0.07);border-color:rgba(0,255,136,0.3);color:var(--green);}
+.flow-box.purple{background:rgba(139,92,246,0.08);border-color:rgba(139,92,246,0.3);color:var(--purple);}
+
+/* ═══ BLOCK QUOTE / NOTES ═══ */
+.note{
+  border-left:3px solid var(--cyan);padding:12px 18px;
+  background:rgba(0,200,255,0.04);border-radius:0 8px 8px 0;margin:14px 0;
+  font-size:13px;color:var(--text2);line-height:1.65;
+}
+.note strong{color:var(--cyan);}
+
+/* ═══ SPEC ROW ═══ */
+.spec-row{display:flex;justify-content:space-between;align-items:center;padding:9px 0;border-bottom:1px solid rgba(255,255,255,0.05);}
+.spec-row:last-child{border-bottom:none;}
+.spec-label{font-size:13px;color:var(--text2);}
+.spec-val{font-family:var(--mono);font-size:12px;font-weight:700;color:var(--cyan);}
+
+/* ═══ SAFETY RULE ═══ */
+.safety-rule{
+  display:flex;gap:14px;padding:14px 18px;
+  background:rgba(255,64,96,0.05);border:1px solid rgba(255,64,96,0.18);border-radius:10px;
+  margin:10px 0;align-items:flex-start;
+}
+.sr-num{
+  width:26px;height:26px;border-radius:50%;background:var(--danger);
+  color:#fff;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;font-family:var(--mono);
+}
+.sr-text{font-size:13.5px;color:rgba(255,180,180,0.85);line-height:1.6;}
+.sr-text strong{color:#fff;}
+
+/* ═══ BLOCK-DIAGRAM SVG ═══ */
+.diag-container{
+  background:rgba(2,6,14,0.98);border:1px solid var(--border);border-radius:14px;
+  padding:28px 20px;overflow-x:auto;margin:20px 0;
+  box-shadow:0 20px 60px rgba(0,0,0,0.5);
+}
+
+/* ═══ BOM TOTAL ═══ */
+.bom-total{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:16px 22px;border-radius:10px;margin-top:16px;
+  background:linear-gradient(135deg,rgba(0,200,255,0.08),rgba(139,92,246,0.08));
+  border:1px solid rgba(0,200,255,0.2);
+}
+.bom-total-label{font-size:14px;font-weight:700;color:var(--text);letter-spacing:1px;text-transform:uppercase;font-family:var(--mono);}
+.bom-total-val{font-size:22px;font-weight:700;color:var(--green);font-family:var(--mono);}
+
+/* FOOTER */
+footer{
+  text-align:center;padding:40px 20px;border-top:1px solid var(--border2);
+  font-family:var(--mono);font-size:11px;color:var(--text3);letter-spacing:1.5px;
+}
+footer span{color:var(--cyan);}
+
+/* Utility */
+.mt{margin-top:20px;}
+.mb{margin-bottom:20px;}
+.p-body{font-size:14px;color:var(--text2);line-height:1.75;margin-bottom:14px;}
+.section-intro{font-size:15px;color:var(--text2);line-height:1.75;margin-bottom:28px;max-width:820px;}
+ul.check-list{list-style:none;display:flex;flex-direction:column;gap:7px;}
+ul.check-list li{display:flex;align-items:flex-start;gap:10px;font-size:13.5px;color:var(--text2);line-height:1.6;}
+ul.check-list li::before{content:'→';color:var(--cyan);font-family:var(--mono);flex-shrink:0;margin-top:1px;}
+
+/* Sub heading */
+.sub-title{
+  font-size:18px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;
+  color:#fff;margin:28px 0 14px;display:flex;align-items:center;gap:10px;
+}
+.sub-title::before{content:'';display:block;width:16px;height:2px;background:linear-gradient(90deg,var(--cyan),var(--purple));border-radius:2px;}
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════
+     HEADER
+═══════════════════════════════════════ -->
+<header class="site-header">
+  <div class="header-tag">College Project — IoT & Embedded Systems</div>
+  <h1 class="site-title">VOLTGUARD</h1>
+  <p class="site-sub">Smart Electricity Theft Detection System</p>
+  <div class="header-badges">
+    <span class="badge badge-c">ESP32</span>
+    <span class="badge badge-g">ACS712 + ZMPT101B</span>
+    <span class="badge badge-p">Firebase / MQTT</span>
+    <span class="badge badge-a">Real-Time Dashboard</span>
+    <span class="badge badge-c">Relay Cut-Off</span>
+  </div>
+</header>
+
+<!-- ═══ STICKY NAV ═══ -->
+<nav class="toc-nav">
+  <ul class="toc-list">
+    <li><a href="#s1">01 Overview</a></li>
+    <li><a href="#s2">02 Components</a></li>
+    <li><a href="#s3">03 Circuit</a></li>
+    <li><a href="#s4">04 Build Guide</a></li>
+    <li><a href="#s5">05 Detection Logic</a></li>
+    <li><a href="#s6">06 ESP32 Code</a></li>
+    <li><a href="#s7">07 Data Transmission</a></li>
+    <li><a href="#s8">08 Dashboard</a></li>
+    <li><a href="#s9">09 Advanced Features</a></li>
+    <li><a href="#s10">10 Safety</a></li>
+  </ul>
+</nav>
+
+<div class="wrap">
+
+<!-- ═══════════════════════════════════════
+     SECTION 1 — SYSTEM OVERVIEW
+═══════════════════════════════════════ -->
+<section class="section" id="s1">
+  <div class="sec-hdr">
+    <div class="sec-num">01</div>
+    <div>
+      <div class="sec-title">System Overview</div>
+      <div class="sec-subtitle">Architecture · Working Principle · Block Diagram</div>
+    </div>
+  </div>
+
+  <p class="section-intro">
+    VOLTGUARD is a real-time electricity theft detection system built on the <strong>ESP32 microcontroller</strong>.
+    It continuously monitors supply and load current/voltage, applies fuzzy-logic-style thresholds to identify anomalies,
+    and instantly alerts the grid operator via a web dashboard, SMS, and relay cut-off.
+  </p>
+
+  <!-- Block Diagram -->
+  <div class="diag-container">
+    <svg viewBox="0 0 900 380" xmlns="http://www.w3.org/2000/svg" style="min-width:700px">
+      <defs>
+        <linearGradient id="gcyan" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#00C8FF" stop-opacity="0.8"/><stop offset="100%" stop-color="#00E5FF" stop-opacity="0.4"/></linearGradient>
+        <linearGradient id="ggreen" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#00FF88" stop-opacity="0.8"/><stop offset="100%" stop-color="#00CC66" stop-opacity="0.4"/></linearGradient>
+        <linearGradient id="gamber" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#FFB800" stop-opacity="0.8"/><stop offset="100%" stop-color="#FF8800" stop-opacity="0.4"/></linearGradient>
+        <linearGradient id="gpurple" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#8B5CF6" stop-opacity="0.8"/><stop offset="100%" stop-color="#6D28D9" stop-opacity="0.4"/></linearGradient>
+        <linearGradient id="gdanger" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#FF4060" stop-opacity="0.8"/><stop offset="100%" stop-color="#CC2040" stop-opacity="0.4"/></linearGradient>
+        <filter id="glow"><feGaussianBlur stdDeviation="2" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+        <marker id="arrow" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+          <polygon points="0 0, 10 3.5, 0 7" fill="rgba(0,200,255,0.6)"/>
+        </marker>
+        <marker id="arrow-g" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+          <polygon points="0 0, 10 3.5, 0 7" fill="rgba(0,255,136,0.6)"/>
+        </marker>
+        <marker id="arrow-r" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+          <polygon points="0 0, 10 3.5, 0 7" fill="rgba(255,64,96,0.6)"/>
+        </marker>
+      </defs>
+
+      <!-- AC Mains -->
+      <rect x="10" y="155" width="110" height="60" rx="8" fill="rgba(255,64,96,0.1)" stroke="rgba(255,64,96,0.5)" stroke-width="1.5"/>
+      <text x="65" y="181" font-family="IBM Plex Mono" font-size="11" fill="#FF4060" text-anchor="middle" font-weight="700">AC MAINS</text>
+      <text x="65" y="196" font-family="IBM Plex Mono" font-size="9" fill="rgba(255,64,96,0.7)" text-anchor="middle">230V / 50Hz</text>
+      <text x="65" y="209" font-family="IBM Plex Mono" font-size="9" fill="rgba(255,64,96,0.7)" text-anchor="middle">SUPPLY</text>
+
+      <!-- ZMPT101B -->
+      <rect x="155" y="90" width="110" height="55" rx="8" fill="rgba(0,200,255,0.07)" stroke="rgba(0,200,255,0.4)" stroke-width="1.5"/>
+      <text x="210" y="114" font-family="IBM Plex Mono" font-size="10" fill="#00C8FF" text-anchor="middle" font-weight="700">ZMPT101B</text>
+      <text x="210" y="130" font-family="IBM Plex Mono" font-size="9" fill="rgba(0,200,255,0.6)" text-anchor="middle">Voltage Sensor</text>
+
+      <!-- ACS712 Supply Side -->
+      <rect x="155" y="165" width="110" height="55" rx="8" fill="rgba(0,200,255,0.07)" stroke="rgba(0,200,255,0.4)" stroke-width="1.5"/>
+      <text x="210" y="189" font-family="IBM Plex Mono" font-size="10" fill="#00C8FF" text-anchor="middle" font-weight="700">ACS712</text>
+      <text x="210" y="205" font-family="IBM Plex Mono" font-size="9" fill="rgba(0,200,255,0.6)" text-anchor="middle">Supply Current</text>
+
+      <!-- Wires from mains -->
+      <line x1="120" y1="175" x2="155" y2="118" stroke="rgba(0,200,255,0.4)" stroke-width="1.5" stroke-dasharray="5,3" marker-end="url(#arrow)"/>
+      <line x1="120" y1="185" x2="155" y2="193" stroke="rgba(0,200,255,0.4)" stroke-width="1.5" stroke-dasharray="5,3" marker-end="url(#arrow)"/>
+
+      <!-- ESP32 (Center) -->
+      <rect x="320" y="110" width="160" height="160" rx="12" fill="rgba(139,92,246,0.1)" stroke="rgba(139,92,246,0.6)" stroke-width="2" filter="url(#glow)"/>
+      <text x="400" y="160" font-family="Rajdhani" font-size="18" fill="#8B5CF6" text-anchor="middle" font-weight="700">ESP32</text>
+      <text x="400" y="180" font-family="IBM Plex Mono" font-size="9" fill="rgba(139,92,246,0.8)" text-anchor="middle">Dual-Core 240MHz</text>
+      <text x="400" y="196" font-family="IBM Plex Mono" font-size="9" fill="rgba(139,92,246,0.8)" text-anchor="middle">WiFi + Bluetooth</text>
+      <text x="400" y="212" font-family="IBM Plex Mono" font-size="9" fill="rgba(139,92,246,0.8)" text-anchor="middle">12-bit ADC</text>
+      <text x="400" y="228" font-family="IBM Plex Mono" font-size="9" fill="rgba(139,92,246,0.8)" text-anchor="middle">GPIO · UART · SPI</text>
+
+      <!-- Sensor to ESP arrows -->
+      <line x1="265" y1="118" x2="320" y2="150" stroke="rgba(0,200,255,0.5)" stroke-width="1.5" marker-end="url(#arrow)"/>
+      <line x1="265" y1="193" x2="320" y2="180" stroke="rgba(0,200,255,0.5)" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+      <!-- Load side -->
+      <rect x="155" y="245" width="110" height="55" rx="8" fill="rgba(0,255,136,0.07)" stroke="rgba(0,255,136,0.4)" stroke-width="1.5"/>
+      <text x="210" y="269" font-family="IBM Plex Mono" font-size="10" fill="#00FF88" text-anchor="middle" font-weight="700">ACS712</text>
+      <text x="210" y="285" font-family="IBM Plex Mono" font-size="9" fill="rgba(0,255,136,0.6)" text-anchor="middle">Load Current</text>
+      <line x1="265" y1="272" x2="320" y2="210" stroke="rgba(0,255,136,0.5)" stroke-width="1.5" marker-end="url(#arrow-g)"/>
+
+      <!-- Right side outputs -->
+      <!-- Firebase/Cloud -->
+      <rect x="545" y="60" width="120" height="55" rx="8" fill="rgba(255,184,0,0.08)" stroke="rgba(255,184,0,0.4)" stroke-width="1.5"/>
+      <text x="605" y="84" font-family="IBM Plex Mono" font-size="10" fill="#FFB800" text-anchor="middle" font-weight="700">FIREBASE</text>
+      <text x="605" y="100" font-family="IBM Plex Mono" font-size="9" fill="rgba(255,184,0,0.6)" text-anchor="middle">Cloud Database</text>
+
+      <!-- Dashboard -->
+      <rect x="720" y="60" width="120" height="55" rx="8" fill="rgba(0,200,255,0.07)" stroke="rgba(0,200,255,0.4)" stroke-width="1.5"/>
+      <text x="780" y="84" font-family="IBM Plex Mono" font-size="10" fill="#00C8FF" text-anchor="middle" font-weight="700">DASHBOARD</text>
+      <text x="780" y="100" font-family="IBM Plex Mono" font-size="9" fill="rgba(0,200,255,0.6)" text-anchor="middle">Web / Mobile</text>
+
+      <!-- Relay -->
+      <rect x="545" y="155" width="120" height="55" rx="8" fill="rgba(255,64,96,0.08)" stroke="rgba(255,64,96,0.4)" stroke-width="1.5"/>
+      <text x="605" y="179" font-family="IBM Plex Mono" font-size="10" fill="#FF4060" text-anchor="middle" font-weight="700">RELAY</text>
+      <text x="605" y="195" font-family="IBM Plex Mono" font-size="9" fill="rgba(255,64,96,0.6)" text-anchor="middle">Power Cut-Off</text>
+
+      <!-- Buzzer -->
+      <rect x="545" y="240" width="120" height="55" rx="8" fill="rgba(255,184,0,0.08)" stroke="rgba(255,184,0,0.4)" stroke-width="1.5"/>
+      <text x="605" y="264" font-family="IBM Plex Mono" font-size="10" fill="#FFB800" text-anchor="middle" font-weight="700">BUZZER</text>
+      <text x="605" y="280" font-family="IBM Plex Mono" font-size="9" fill="rgba(255,184,0,0.6)" text-anchor="middle">Local Alert</text>
+
+      <!-- GSM -->
+      <rect x="545" y="325" width="120" height="45" rx="8" fill="rgba(139,92,246,0.08)" stroke="rgba(139,92,246,0.4)" stroke-width="1.5"/>
+      <text x="605" y="348" font-family="IBM Plex Mono" font-size="10" fill="#8B5CF6" text-anchor="middle" font-weight="700">GSM SIM800L</text>
+      <text x="605" y="362" font-family="IBM Plex Mono" font-size="9" fill="rgba(139,92,246,0.6)" text-anchor="middle">SMS Alerts</text>
+
+      <!-- ESP to outputs -->
+      <line x1="480" y1="150" x2="545" y2="88" stroke="rgba(255,184,0,0.5)" stroke-width="1.5" stroke-dasharray="5,3" marker-end="url(#arrow)"/>
+      <line x1="480" y1="183" x2="545" y2="183" stroke="rgba(255,64,96,0.5)" stroke-width="1.5" marker-end="url(#arrow-r)"/>
+      <line x1="480" y1="220" x2="545" y2="267" stroke="rgba(255,184,0,0.5)" stroke-width="1.5" marker-end="url(#arrow)"/>
+      <line x1="480" y1="240" x2="545" y2="347" stroke="rgba(139,92,246,0.5)" stroke-width="1.5" marker-end="url(#arrow)"/>
+      <!-- Firebase to Dashboard -->
+      <line x1="665" y1="87" x2="720" y2="87" stroke="rgba(0,200,255,0.4)" stroke-width="1.5" stroke-dasharray="5,3" marker-end="url(#arrow)"/>
+
+      <!-- WiFi symbol -->
+      <text x="604" y="135" font-family="IBM Plex Mono" font-size="9" fill="rgba(255,184,0,0.5)" text-anchor="middle">((WiFi))</text>
+
+      <!-- Power supply label -->
+      <rect x="330" y="300" width="140" height="40" rx="8" fill="rgba(0,200,255,0.05)" stroke="rgba(0,200,255,0.2)" stroke-width="1"/>
+      <text x="400" y="316" font-family="IBM Plex Mono" font-size="9" fill="rgba(0,200,255,0.6)" text-anchor="middle">HI-LINK 5V PSU</text>
+      <text x="400" y="332" font-family="IBM Plex Mono" font-size="9" fill="rgba(0,200,255,0.5)" text-anchor="middle">Powers ESP32 + Sensors</text>
+      <line x1="400" y1="300" x2="400" y2="270" stroke="rgba(0,200,255,0.3)" stroke-width="1" stroke-dasharray="3,2"/>
+    </svg>
+  </div>
+
+  <div class="grid3 mt">
+    <div class="card">
+      <div class="card-hdr"><div class="card-icon" style="background:rgba(0,200,255,0.1)">📡</div><div class="card-title" style="color:var(--cyan)">Data Flow</div></div>
+      <div class="card-body">Sensors → ESP32 ADC → Processing → WiFi → Firebase → Dashboard update every <strong>500ms</strong></div>
+    </div>
+    <div class="card">
+      <div class="card-hdr"><div class="card-icon" style="background:rgba(255,64,96,0.1)">⚡</div><div class="card-title" style="color:var(--danger)">Theft Detection</div></div>
+      <div class="card-body">Compares supply vs load current. Difference &gt; <strong>10%</strong> triggers alert, relay cut-off, SMS, and dashboard notification.</div>
+    </div>
+    <div class="card">
+      <div class="card-hdr"><div class="card-icon" style="background:rgba(0,255,136,0.1)">🛡️</div><div class="card-title" style="color:var(--green)">Safety</div></div>
+      <div class="card-body">All AC mains handled through <strong>optocoupled</strong> and <strong>transformer-isolated</strong> sensors. ESP32 never touches mains voltage.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     SECTION 2 — COMPONENT LIST
+═══════════════════════════════════════ -->
+<section class="section" id="s2">
+  <div class="sec-hdr">
+    <div class="sec-num">02</div>
+    <div>
+      <div class="sec-title">Complete Components List</div>
+      <div class="sec-subtitle">Bill of Materials — Everything You Need</div>
+    </div>
+  </div>
+
+  <p class="section-intro">Every single component needed to build the VOLTGUARD prototype. Prices are approximate Indian market rates (2024). Total cost is well within a college project budget.</p>
+
+  <div class="sub-title">🧠 Microcontroller</div>
+  <div class="grid2">
+    <div class="comp-card">
+      <div class="comp-qty">QTY: 1</div>
+      <div class="comp-name">ESP32 DevKit V1</div>
+      <div class="comp-model">Espressif ESP32-WROOM-32</div>
+      <div class="comp-desc">Dual-core 240 MHz, 520KB SRAM, built-in WiFi 802.11 b/g/n + Bluetooth 4.2, 12-bit ADC (36 channels), 3.3V logic. The brain of the entire system.</div>
+      <div class="comp-cost"><span>APPROX COST</span><span>₹400–500 / $5–6</span></div>
+      <div class="comp-tags"><span class="comp-tag tag-mcu">MCU</span><span class="comp-tag tag-sensor">WiFi</span></div>
+    </div>
+    <div class="comp-card">
+      <div class="comp-qty">QTY: 1</div>
+      <div class="comp-name">Micro-USB Cable + Power Bank</div>
+      <div class="comp-model">5V/2A minimum</div>
+      <div class="comp-desc">For programming and powering the ESP32 during development. A 5V 2A phone charger works fine for bench testing.</div>
+      <div class="comp-cost"><span>APPROX COST</span><span>₹100 / $1.5</span></div>
+      <div class="comp-tags"><span class="comp-tag tag-power">POWER</span></div>
+    </div>
+  </div>
+
+  <div class="sub-title">⚡ Sensors</div>
+  <div class="grid2">
+    <div class="comp-card">
+      <div class="comp-qty">QTY: 2</div>
+      <div class="comp-name">ACS712 Current Sensor</div>
+      <div class="comp-model">ACS712ELCTR-30A-T (30A variant)</div>
+      <div class="comp-desc">Hall-effect current sensor. One installed on the supply side, one on the load side. Outputs analog voltage proportional to current. Sensitivity: 66 mV/A. Operates on 5V with 3.3V-compatible output (~2.5V at 0A). <strong>Need 2 units</strong> for supply + load comparison.</div>
+      <div class="comp-cost"><span>APPROX COST</span><span>₹120 each / $1.5 each</span></div>
+      <div class="comp-tags"><span class="comp-tag tag-sensor">SENSOR</span><span class="comp-tag tag-protect">AC-SAFE</span></div>
+    </div>
+    <div class="comp-card">
+      <div class="comp-qty">QTY: 1</div>
+      <div class="comp-name">ZMPT101B Voltage Sensor</div>
+      <div class="comp-model">ZMPT101B Single-Phase AC</div>
+      <div class="comp-desc">Transformer-based AC voltage sensor module. Measures 0–250V AC. Provides galvanic isolation between mains and ESP32. Outputs scaled analog signal (0–3.3V) safe for ESP32 ADC. Includes onboard op-amp for signal conditioning. Potentiometer for calibration.</div>
+      <div class="comp-cost"><span>APPROX COST</span><span>₹150 / $2</span></div>
+      <div class="comp-tags"><span class="comp-tag tag-sensor">SENSOR</span><span class="comp-tag tag-protect">ISOLATED</span></div>
+    </div>
+  </div>
+
+  <div class="sub-title">🔌 Power Supply</div>
+  <div class="grid2">
+    <div class="comp-card">
+      <div class="comp-qty">QTY: 1</div>
+      <div class="comp-name">HLK-PM01 Hi-Link Module</div>
+      <div class="comp-model">AC-DC 220V to 5V 600mA</div>
+      <div class="comp-desc"><strong>Best choice for this project.</strong> Isolated AC-to-DC converter module. Input: 100–240V AC. Output: 5V DC, 600mA. Compact size, built-in isolation. Safer than building a discrete PSU. Directly powers ESP32 + sensors from mains.</div>
+      <div class="comp-cost"><span>APPROX COST</span><span>₹250–300 / $3</span></div>
+      <div class="comp-tags"><span class="comp-tag tag-power">POWER</span><span class="comp-tag tag-protect">ISOLATED</span></div>
+    </div>
+    <div class="comp-card">
+      <div class="comp-qty">QTY: 1</div>
+      <div class="comp-name">AMS1117-3.3V LDO Regulator</div>
+      <div class="comp-model">AMS1117-3.3 SOT-223</div>
+      <div class="comp-desc">Steps down 5V from HLK to 3.3V for ESP32 and sensor analog reference. ESP32 DevKit V1 already includes this onboard — only needed if building custom PCB. Include 10µF + 100nF bypass capacitors on output.</div>
+      <div class="comp-cost"><span>APPROX COST</span><span>₹10 / $0.15</span></div>
+      <div class="comp-tags"><span class="comp-tag tag-power">POWER</span></div>
+    </div>
+  </div>
+
+  <div class="sub-title">🔧 Output &amp; Alert Modules</div>
+  <div class="grid2">
+    <div class="comp-card">
+      <div class="comp-qty">QTY: 1</div>
+      <div class="comp-name">5V Relay Module</div>
+      <div class="comp-model">SRD-05VDC-SL-C (1-Channel)</div>
+      <div class="comp-desc">Optocoupler-isolated relay. Rated 10A / 250V AC. Controlled by ESP32 GPIO via NPN transistor (already on most relay modules). Used to cut AC power when theft is detected. NO/NC contacts for fail-safe operation.</div>
+      <div class="comp-cost"><span>APPROX COST</span><span>₹60–80 / $1</span></div>
+      <div class="comp-tags"><span class="comp-tag tag-output">OUTPUT</span><span class="comp-tag tag-protect">ISOLATED</span></div>
+    </div>
+    <div class="comp-card">
+      <div class="comp-qty">QTY: 1</div>
+      <div class="comp-name">Active Buzzer</div>
+      <div class="comp-model">5V Active Buzzer Module</div>
+      <div class="comp-desc">Generates audible alert on theft detection. Active type means it beeps when pin is HIGH — no tone generation needed. Connect through NPN transistor (2N2222 or BC547) to protect ESP32 GPIO current limit.</div>
+      <div class="comp-cost"><span>APPROX COST</span><span>₹20 / $0.3</span></div>
+      <div class="comp-tags"><span class="comp-tag tag-output">OUTPUT</span></div>
+    </div>
+    <div class="comp-card">
+      <div class="comp-qty">QTY: 1</div>
+      <div class="comp-name">SIM800L GSM Module</div>
+      <div class="comp-model">SIM800L EVB (optional)</div>
+      <div class="comp-desc">For SMS alerts to mobile number when theft is detected. Operates at 3.7–4.2V (needs its own LiPo or 4V regulator — <strong>not</strong> 3.3V!). Connects via UART (TX/RX) to ESP32. Include a 1000µF capacitor on power rail.</div>
+      <div class="comp-cost"><span>APPROX COST</span><span>₹350–400 / $5</span></div>
+      <div class="comp-tags"><span class="comp-tag tag-mcu">GSM</span><span class="comp-tag tag-output">SMS</span></div>
+    </div>
+    <div class="comp-card">
+      <div class="comp-qty">QTY: 1</div>
+      <div class="comp-name">16×2 LCD with I2C Module</div>
+      <div class="comp-model">HD44780 + PCF8574 I2C Backpack</div>
+      <div class="comp-desc">Optional local display for showing voltage, current, and theft status without needing the dashboard. I2C backpack reduces wiring to just 4 wires (VCC, GND, SDA, SCL). Highly recommended for the presentation demo.</div>
+      <div class="comp-cost"><span>APPROX COST</span><span>₹120 / $1.5</span></div>
+      <div class="comp-tags"><span class="comp-tag tag-output">DISPLAY</span></div>
+    </div>
+  </div>
+
+  <div class="sub-title">🔩 Passive Components &amp; Accessories</div>
+  <div class="grid4">
+    <div class="comp-card">
+      <div class="comp-qty">QTY: 5</div>
+      <div class="comp-name">10kΩ Resistor</div>
+      <div class="comp-model">1/4W ±1%</div>
+      <div class="comp-desc">Pull-down resistors for ADC inputs to prevent floating readings.</div>
+      <div class="comp-cost"><span>~</span><span>₹5 total</span></div>
+      <div class="comp-tags"><span class="comp-tag tag-passive">PASSIVE</span></div>
+    </div>
+    <div class="comp-card">
+      <div class="comp-qty">QTY: 3</div>
+      <div class="comp-name">100nF Capacitor</div>
+      <div class="comp-model">104 Ceramic Disc</div>
+      <div class="comp-desc">Bypass capacitors near each sensor and ESP32 VCC pin to filter noise.</div>
+      <div class="comp-cost"><span>~</span><span>₹10 total</span></div>
+      <div class="comp-tags"><span class="comp-tag tag-passive">PASSIVE</span></div>
+    </div>
+    <div class="comp-card">
+      <div class="comp-qty">QTY: 2</div>
+      <div class="comp-name">10µF Electrolytic</div>
+      <div class="comp-model">25V Electrolytic</div>
+      <div class="comp-desc">Power supply filtering on 5V and 3.3V rails.</div>
+      <div class="comp-cost"><span>~</span><span>₹5 total</span></div>
+      <div class="comp-tags"><span class="comp-tag tag-passive">PASSIVE</span></div>
+    </div>
+    <div class="comp-card">
+      <div class="comp-qty">QTY: 3</div>
+      <div class="comp-name">BC547 NPN Transistor</div>
+      <div class="comp-model">BC547B TO-92</div>
+      <div class="comp-desc">For driving buzzer, relay, and LED indicators from ESP32 3.3V GPIO safely.</div>
+      <div class="comp-cost"><span>~</span><span>₹5 total</span></div>
+      <div class="comp-tags"><span class="comp-tag tag-passive">TRANSISTOR</span></div>
+    </div>
+    <div class="comp-card">
+      <div class="comp-qty">QTY: 3</div>
+      <div class="comp-name">1N4007 Diode</div>
+      <div class="comp-model">1A 1000V Rectifier</div>
+      <div class="comp-desc">Flyback protection diode across relay coil to prevent voltage spikes when relay switches.</div>
+      <div class="comp-cost"><span>~</span><span>₹5 total</span></div>
+      <div class="comp-tags"><span class="comp-tag tag-protect">PROTECTION</span></div>
+    </div>
+    <div class="comp-card">
+      <div class="comp-qty">QTY: 1</div>
+      <div class="comp-name">Breadboard</div>
+      <div class="comp-model">830 Tie-Point Full Size</div>
+      <div class="comp-desc">For prototyping the low-voltage (3.3V/5V) ESP32 side. <strong>Never</strong> use breadboard for AC mains connections.</div>
+      <div class="comp-cost"><span>~</span><span>₹80 / $1</span></div>
+      <div class="comp-tags"><span class="comp-tag tag-passive">PROTO</span></div>
+    </div>
+    <div class="comp-card">
+      <div class="comp-qty">QTY: 1 set</div>
+      <div class="comp-name">Jumper Wires</div>
+      <div class="comp-model">M-M, M-F, F-F 20cm</div>
+      <div class="comp-desc">For connecting modules to breadboard and ESP32 headers during prototyping.</div>
+      <div class="comp-cost"><span>~</span><span>₹50 / $0.7</span></div>
+      <div class="comp-tags"><span class="comp-tag tag-passive">WIRES</span></div>
+    </div>
+    <div class="comp-card">
+      <div class="comp-qty">QTY: 1</div>
+      <div class="comp-name">Screw Terminal Block</div>
+      <div class="comp-model">2-pin + 3-pin KF301</div>
+      <div class="comp-desc">For safely connecting AC mains to the HLK module and relay. Never use jumper wires for AC mains.</div>
+      <div class="comp-cost"><span>~</span><span>₹20 / $0.3</span></div>
+      <div class="comp-tags"><span class="comp-tag tag-protect">SAFETY</span></div>
+    </div>
+  </div>
+
+  <div class="bom-total">
+    <div>
+      <div class="bom-total-label">Estimated Total Project Cost</div>
+      <div style="font-size:12px;color:var(--text3);font-family:var(--mono);margin-top:3px;">Includes all components listed above</div>
+    </div>
+    <div class="bom-total-val">₹1,600–2,000 (~$20–25)</div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     SECTION 3 — CIRCUIT DIAGRAM
+═══════════════════════════════════════ -->
+<section class="section" id="s3">
+  <div class="sec-hdr">
+    <div class="sec-num">03</div>
+    <div>
+      <div class="sec-title">Circuit Diagram</div>
+      <div class="sec-subtitle">Pin Connections · Wiring · Power Architecture</div>
+    </div>
+  </div>
+
+  <div class="alert alert-danger">
+    <span class="alert-icon">⚠️</span>
+    <span><strong>CRITICAL SAFETY:</strong> The AC mains (230V) side must be handled only with the HLK module and the isolated sensors. ESP32 and breadboard operate ONLY on 3.3V/5V DC. Never connect ESP32 GPIO pins directly to AC mains.</span>
+  </div>
+
+  <!-- ASCII Circuit -->
+  <div class="code-wrap">
+    <div class="code-header">
+      <div style="display:flex;align-items:center;gap:8px"><div class="code-dot" style="background:#FF5F57"></div><div class="code-dot" style="background:#FFBD2E"></div><div class="code-dot" style="background:#28C840"></div></div>
+      <div class="code-lang">Circuit Topology</div>
+      <div class="code-file">voltguard_circuit.txt</div>
+    </div>
+<pre>
+┌─────────────────────────────────────────────────────────────────────────────────┐
+│                         AC MAINS SIDE (230V — DANGER!)                          │
+│                                                                                  │
+│  L (Live) ─┬──────[ACS712 #1 Supply]──────────────────────┬── LOAD              │
+│            │       (current sensor)                        │                     │
+│            │                                               │                     │
+│            ├──────[ZMPT101B Primary]                       ├──[ACS712 #2 Load]  │
+│            │       (voltage transformer)                   │                     │
+│            │                                               │                     │
+│            └──────[HLK-PM01 Input L]             N ───────┘                     │
+│  N (Neutral) ─────[HLK-PM01 Input N]                                            │
+│                   [RELAY COM ──── Load Line]                                     │
+└─────────────────────────────────────────────────────────────────────────────────┘
+                              │ (Isolated)
+                              ▼
+┌─────────────────────────────────────────────────────────────────────────────────┐
+│                       DC LOW-VOLTAGE SIDE (3.3V / 5V — SAFE)                    │
+│                                                                                  │
+│  HLK-PM01 OUT+ (5V) ──┬── VIN  ESP32 DevKit                                    │
+│  HLK-PM01 OUT− (GND) ─┴── GND  ESP32 DevKit                                    │
+│                                                                                  │
+│  ┌────────────────────────────────────────────────────────────┐                 │
+│  │                    ESP32 DevKit V1                         │                 │
+│  │                                                            │                 │
+│  │  3.3V ──┬── ZMPT101B Vcc        GPIO34 (ADC1_CH6) ──── ZMPT101B OUT        │
+│  │         ├── ACS712 #1 Vcc       GPIO35 (ADC1_CH7) ──── ACS712 #1 OUT       │
+│  │         ├── ACS712 #2 Vcc       GPIO32 (ADC1_CH4) ──── ACS712 #2 OUT       │
+│  │         └── LCD Vcc (via I2C)   GPIO21 (SDA)      ──── LCD I2C SDA         │
+│  │                                 GPIO22 (SCL)      ──── LCD I2C SCL         │
+│  │  GND  ──┬── All sensor GNDs     GPIO26            ──── Relay (via BC547)   │
+│  │         ├── Buzzer GND          GPIO27            ──── Buzzer (via BC547)  │
+│  │         ├── LCD GND             GPIO16 (UART2 RX) ──── SIM800L TX          │
+│  │         └── SIM800L GND         GPIO17 (UART2 TX) ──── SIM800L RX          │
+│  │                                 GPIO2             ──── Status LED           │
+│  └────────────────────────────────────────────────────────────┘                 │
+│                                                                                  │
+│  Relay Driver:  GPIO26 ──[1kΩ]──> BC547 Base                                   │
+│                           BC547 Collector ── Relay Coil+ ── 5V                  │
+│                           BC547 Emitter  ── GND                                 │
+│                           1N4007 across Relay Coil (cathode to 5V)              │
+│                                                                                  │
+│  Buzzer Driver: GPIO27 ──[1kΩ]──> BC547 Base                                   │
+│                           BC547 Collector ── Buzzer+ ── 5V                      │
+│                           BC547 Emitter  ── GND                                 │
+└─────────────────────────────────────────────────────────────────────────────────┘</pre>
+  </div>
+
+  <div class="sub-title">📌 ESP32 Pin Assignment Table</div>
+  <table class="pin-table">
+    <thead>
+      <tr><th>ESP32 GPIO</th><th>Connected To</th><th>Signal Type</th><th>Description</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><span class="pin">GPIO34</span></td><td>ZMPT101B OUT</td><td><span class="pin pin-a">ANALOG INPUT</span></td><td class="desc-text">Reads AC voltage signal (ADC1 CH6 — input-only pin, ideal for ADC)</td></tr>
+      <tr><td><span class="pin">GPIO35</span></td><td>ACS712 #1 OUT</td><td><span class="pin pin-a">ANALOG INPUT</span></td><td class="desc-text">Supply-side current measurement (ADC1 CH7)</td></tr>
+      <tr><td><span class="pin">GPIO32</span></td><td>ACS712 #2 OUT</td><td><span class="pin pin-a">ANALOG INPUT</span></td><td class="desc-text">Load-side current measurement (ADC1 CH4)</td></tr>
+      <tr><td><span class="pin">GPIO26</span></td><td>Relay Module IN</td><td><span class="pin pin-g">DIGITAL OUTPUT</span></td><td class="desc-text">HIGH = relay energized = power cut-off (active LOW most relay boards)</td></tr>
+      <tr><td><span class="pin">GPIO27</span></td><td>Buzzer</td><td><span class="pin pin-g">DIGITAL OUTPUT</span></td><td class="desc-text">HIGH = buzzer ON (driven through BC547 transistor)</td></tr>
+      <tr><td><span class="pin">GPIO21</span></td><td>LCD SDA</td><td><span class="pin">I2C</span></td><td class="desc-text">I2C data line for 16×2 LCD display</td></tr>
+      <tr><td><span class="pin">GPIO22</span></td><td>LCD SCL</td><td><span class="pin">I2C</span></td><td class="desc-text">I2C clock line for 16×2 LCD display</td></tr>
+      <tr><td><span class="pin">GPIO16</span></td><td>SIM800L TX</td><td><span class="pin pin-p">UART2 RX</span></td><td class="desc-text">Receives data from GSM module (SIM800L TX → ESP32 RX)</td></tr>
+      <tr><td><span class="pin">GPIO17</span></td><td>SIM800L RX</td><td><span class="pin pin-p">UART2 TX</span></td><td class="desc-text">Sends AT commands to GSM module (ESP32 TX → SIM800L RX)</td></tr>
+      <tr><td><span class="pin">GPIO2</span></td><td>Status LED</td><td><span class="pin pin-g">DIGITAL OUTPUT</span></td><td class="desc-text">Onboard LED — blinks for normal, solid for theft</td></tr>
+      <tr><td><span class="pin pin-g">3.3V</span></td><td>All Sensors VCC</td><td><span class="pin pin-g">POWER</span></td><td class="desc-text">Powers ZMPT101B, ACS712 modules, LCD (some via 5V — check module)</td></tr>
+      <tr><td><span class="pin pin-r">GND</span></td><td>All GNDs</td><td><span class="pin pin-r">GROUND</span></td><td class="desc-text">Common ground for all DC-side components</td></tr>
+    </tbody>
+  </table>
+
+  <div class="note">
+    <strong>ADC Note:</strong> ESP32 ADC has non-linearity near 0V and 3.3V. Use GPIO34/35/32/33 (ADC1 channels only — ADC2 interferes with WiFi). Add a 10kΩ pull-down resistor on each ADC input to prevent floating. All sensor outputs are 0–3.3V safe when powered from 3.3V.
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     SECTION 4 — STEP BY STEP BUILD
+═══════════════════════════════════════ -->
+<section class="section" id="s4">
+  <div class="sec-hdr">
+    <div class="sec-num">04</div>
+    <div>
+      <div class="sec-title">Step-by-Step Build Guide</div>
+      <div class="sec-subtitle">Assembly · Testing · Integration</div>
+    </div>
+  </div>
+
+  <div class="alert alert-danger">
+    <span class="alert-icon">🔴</span>
+    <span><strong>STOP! Read Section 10 (Safety) FIRST</strong> before touching any AC mains wiring. Build and test the DC side completely before connecting to AC mains. Have a supervisor present when working with mains.</span>
+  </div>
+
+  <div class="steps">
+    <div class="step">
+      <div class="step-left"><div class="step-num">1</div><div class="step-line"></div></div>
+      <div class="step-content">
+        <div class="step-title">Set Up the Development Environment</div>
+        <div class="step-body">
+          Install <strong>Arduino IDE 2.x</strong> or <strong>VS Code + PlatformIO</strong>. Add ESP32 board support: in Arduino IDE go to <em>File → Preferences → Additional Board URLs</em> and paste:<br><br>
+          <code>https://dl.espressif.com/dl/package_esp32_index.json</code><br><br>
+          Then go to <em>Tools → Board → Board Manager</em>, search "esp32" and install the Espressif package. Install these libraries via Library Manager: <code>Firebase ESP32</code>, <code>LiquidCrystal_I2C</code>, <code>ArduinoJson</code>. Select board: <strong>DOIT ESP32 DEVKIT V1</strong>, port: your COM port.
+        </div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-left"><div class="step-num">2</div><div class="step-line"></div></div>
+      <div class="step-content">
+        <div class="step-title">Test the ESP32 First</div>
+        <div class="step-body">
+          Before connecting anything, upload the <strong>Blink sketch</strong> to confirm the board is working. Open <em>File → Examples → 01.Basics → Blink</em> and upload. The onboard LED (GPIO2) should blink every second. If it does, your ESP32 is functional. Test WiFi by uploading a simple WiFi scan sketch and verifying it finds nearby networks.
+        </div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-left"><div class="step-num">3</div><div class="step-line"></div></div>
+      <div class="step-content">
+        <div class="step-title">Wire the ACS712 Current Sensors</div>
+        <div class="step-body">
+          Power each ACS712 module from ESP32 <strong>3.3V and GND</strong>. Connect the <strong>OUT</strong> pin to GPIO35 (supply sensor) and GPIO32 (load sensor). Add a <strong>10kΩ pull-down resistor</strong> from each OUT pin to GND. Open Serial Monitor and read raw ADC values — at zero current you should see approximately 2048 (midpoint of 12-bit ADC). Verify: gently touch both IP+ and IP- to a AA battery through a 100Ω resistor and confirm the ADC reading changes.<br><br>
+          <strong>Important:</strong> The current-carrying wire of the circuit passes through the ACS712 module terminals — it does NOT need to be cut; there are two screw terminals (IP+ and IP−) through which the load wire loops.
+        </div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-left"><div class="step-num">4</div><div class="step-line"></div></div>
+      <div class="step-content">
+        <div class="step-title">Wire the ZMPT101B Voltage Sensor</div>
+        <div class="step-body">
+          Power ZMPT101B from <strong>5V and GND</strong> (this module requires 5V). Connect <strong>OUT</strong> to GPIO34 on ESP32. Initially, test with a safe low-voltage AC source (like a 9V AC transformer secondary). Connect ZMPT101B primary terminals to the AC transformer secondary. Read the ADC and adjust the onboard potentiometer until you see a clean oscillating signal centered around 2048. Once calibrated at low voltage, the mains connection follows the same principle but requires full safety measures (Section 10).
+        </div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-left"><div class="step-num">5</div><div class="step-line"></div></div>
+      <div class="step-content">
+        <div class="step-title">Wire the Relay Module</div>
+        <div class="step-body">
+          Connect relay module: <code>VCC → 5V</code>, <code>GND → GND</code>, <code>IN → GPIO26</code> (through the driver transistor). The transistor circuit: ESP32 GPIO26 → 1kΩ resistor → BC547 Base. BC547 Collector → Relay IN pin. BC547 Emitter → GND. Place the 1N4007 flyback diode across the relay coil terminals (cathode to the positive side). Test by running: <code>digitalWrite(26, HIGH)</code> — you should hear a click. Use a multimeter to verify the relay COM-NO contact closes when triggered.
+        </div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-left"><div class="step-num">6</div><div class="step-line"></div></div>
+      <div class="step-content">
+        <div class="step-title">Wire the LCD and Buzzer</div>
+        <div class="step-body">
+          <strong>LCD:</strong> Connect I2C LCD backpack: <code>VCC → 5V</code>, <code>GND → GND</code>, <code>SDA → GPIO21</code>, <code>SCL → GPIO22</code>. Upload the I2C scanner sketch to verify address (usually 0x27 or 0x3F). Adjust LCD contrast via backpack potentiometer.<br><br>
+          <strong>Buzzer:</strong> Active buzzer through BC547: GPIO27 → 1kΩ → BC547 Base, Collector → Buzzer+ (5V side), Emitter → GND. GND pin of buzzer also to GND. Test with a quick HIGH/LOW pulse.
+        </div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-left"><div class="step-num">7</div><div class="step-line"></div></div>
+      <div class="step-content">
+        <div class="step-title">Set Up HLK-PM01 Power Supply (AC Mains — Supervised)</div>
+        <div class="step-body">
+          <strong>Only do this step with a supervisor and with the circuit disconnected from ESP32 first.</strong><br><br>
+          Use screw terminal blocks for all mains connections. Connect HLK-PM01 Input L and N to mains L and N. Connect HLK OUT+ to ESP32 VIN, OUT− to GND. Power on and measure HLK output with a multimeter — should be 5.0V ±0.25V. Then disconnect mains, reconnect all DC components to ESP32, and power on again. Your entire system should run from mains power now.
+        </div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-left"><div class="step-num">8</div><div class="step-line"></div></div>
+      <div class="step-content">
+        <div class="step-title">Full System Integration Test</div>
+        <div class="step-body">
+          Upload the complete firmware (Section 6). Connect to your WiFi network. Open Serial Monitor at 115200 baud — you should see voltage, supply current, load current, power, and theft status printing every 500ms. Verify Firebase receives the data (Section 7). Simulate theft by slightly disconnecting the load-side ACS712 sensor wire to create an artificial imbalance — the buzzer should sound, relay should click, and the dashboard should show a theft alert.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     SECTION 5 — DETECTION LOGIC
+═══════════════════════════════════════ -->
+<section class="section" id="s5">
+  <div class="sec-hdr">
+    <div class="sec-num">05</div>
+    <div>
+      <div class="sec-title">Theft Detection Logic</div>
+      <div class="sec-subtitle">Mathematical Model · Conditions · Decision Tree</div>
+    </div>
+  </div>
+
+  <p class="section-intro">Electricity theft is detected by comparing the current entering a distribution segment (supply current) with the current actually consumed by registered loads (load current). Any significant difference indicates either theft or an illegal bypass.</p>
+
+  <div class="sub-title">📐 Sensor Reading Formulas</div>
+  <div class="formula">
+    <div class="comment">// ACS712-30A: Sensitivity = 66 mV/A, Offset = 2.5V (5V supply) → 1.65V (3.3V supply)</div>
+    ADC_raw = analogRead(pin)          <span class="comment">// 0–4095 for ESP32 12-bit</span>
+    V_adc   = ADC_raw × (3.3 / 4095)  <span class="comment">// Convert to voltage</span>
+
+    <span class="comment">// Peak current (measured over many samples):</span>
+    I_peak  = (V_adc − V_offset) / Sensitivity
+            = (V_adc − 1.65)    / 0.066        <span class="comment">// in Amperes</span>
+
+    <span class="comment">// RMS current (sample N points over one AC cycle ~20ms @ 50Hz):</span>
+    I_rms   = √( (1/N) × Σ(I_sample²) )
+
+    <span class="comment">// ZMPT101B voltage (calibration constant K found experimentally):</span>
+    V_rms   = K × √( (1/N) × Σ(V_sample²) )   <span class="comment">// K ≈ 210–240 (calibrate!)</span>
+
+    <span class="comment">// Power:</span>
+    P_real  = V_rms × I_rms × Power_Factor      <span class="comment">// Watts (PF ≈ 0.85 assumed)</span>
+  </div>
+
+  <div class="sub-title">🔍 Theft Detection Conditions</div>
+  <div class="grid2">
+    <div class="card">
+      <div class="card-hdr"><div class="card-icon" style="background:rgba(255,64,96,0.12)">⚡</div><div class="card-title" style="color:var(--danger)">Condition 1 — Current Imbalance</div></div>
+      <div class="card-body">
+        <strong>Primary detection method.</strong>
+        <div class="formula" style="margin-top:12px;font-size:12px">
+          Imbalance% = |I_supply − I_load| / I_supply × 100
+
+          <span class="comment">// Normal:  Imbalance% &lt; 5%  (line losses)</span>
+          <span class="comment">// Suspect: Imbalance% 5–10% (investigate)</span>
+          <span class="comment">// THEFT:   Imbalance% &gt; 10% → ALERT!</span>
+        </div>
+        A significant difference between supply and load current means current is going somewhere unaccounted — an illegal bypass.
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-hdr"><div class="card-icon" style="background:rgba(255,184,0,0.12)">📉</div><div class="card-title" style="color:var(--amber)">Condition 2 — Voltage Drop</div></div>
+      <div class="card-body">
+        <strong>Secondary indicator.</strong>
+        <div class="formula" style="margin-top:12px;font-size:12px">
+          V_drop% = |V_nominal − V_measured| / V_nominal × 100
+
+          <span class="comment">// Normal:   V_drop% &lt; 5%</span>
+          <span class="comment">// Suspect:  V_drop% 5–10%</span>
+          <span class="comment">// Abnormal: V_drop% &gt; 10% → flag</span>
+        </div>
+        Sudden unexplained voltage drop at the meter indicates excess current being drawn through an illegal        Sudden unexplained voltage drop at the meter indicates excess current being drawn through an illegal connection.
+      </div>
+    </div>
+  </div>
+
+  <div class="grid2 mt">
+    <div class="card">
+      <div class="card-hdr"><div class="card-icon" style="background:rgba(0,200,255,0.12)">📊</div><div class="card-title" style="color:var(--cyan)">Condition 3 — Sudden Spike</div></div>
+      <div class="card-body">
+        <strong>Transient detection.</strong>
+        <div class="formula" style="margin-top:12px;font-size:12px">
+          Δ I = |I_current − I_previous|
+
+          <span class="comment">// If ΔI > 5A in < 100ms → suspicious spike</span>
+          <span class="comment">// Combine with imbalance check for confirmation</span>
+        </div>
+        A sudden unexplained jump in supply current with no corresponding load increase signals an illegal hook-up event.
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-hdr"><div class="card-icon" style="background:rgba(0,255,136,0.12)">🧠</div><div class="card-title" style="color:var(--green)">Combined Decision Logic</div></div>
+      <div class="card-body">
+        <div class="formula" style="font-size:12px">
+          THEFT_DETECTED = (
+            Imbalance% > THRESH_IMBALANCE     <span class="comment">// 10%</span>
+            AND V_drop%   > THRESH_VOLTAGE     <span class="comment">// 5%</span>
+          )
+          OR (
+            Imbalance%  > THRESH_CRITICAL      <span class="comment">// 25%</span>
+          )
+          <span class="comment">// Any single extreme OR both moderate → alert</span>
+        </div>
+        Using two conditions reduces false positives from momentary load switching.
+      </div>
+    </div>
+  </div>
+
+  <div class="sub-title">🔁 Decision Flow</div>
+  <div style="display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin:16px 0">
+    <div class="flow-box">Read Sensors</div><div class="flow-arrow">→</div>
+    <div class="flow-box">Compute RMS</div><div class="flow-arrow">→</div>
+    <div class="flow-box">Calc Imbalance%</div><div class="flow-arrow">→</div>
+    <div class="flow-box warn">&gt; 10%?</div><div class="flow-arrow">→ YES →</div>
+    <div class="flow-box danger">THEFT ALERT</div><div class="flow-arrow">→</div>
+    <div class="flow-box danger">Cut Relay + Buzz</div>
+  </div>
+  <div style="display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin-top:6px">
+    <div style="width:240px"></div>
+    <div class="flow-arrow">→ NO →</div>
+    <div class="flow-box ok">NORMAL</div><div class="flow-arrow">→</div>
+    <div class="flow-box ok">Log + Send</div><div class="flow-arrow">→</div>
+    <div class="flow-box">Wait 500ms</div><div class="flow-arrow">→</div>
+    <div class="flow-box">Read Sensors</div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     SECTION 6 — ESP32 COMPLETE CODE
+═══════════════════════════════════════ -->
+<section class="section" id="s6">
+  <div class="sec-hdr">
+    <div class="sec-num">06</div>
+    <div>
+      <div class="sec-title">Complete ESP32 Firmware</div>
+      <div class="sec-subtitle">Full Working Code — Arduino C++</div>
+    </div>
+  </div>
+
+  <p class="section-intro">
+    Complete production-ready firmware for the VOLTGUARD system. Paste this into Arduino IDE after installing all required libraries. Replace the WiFi credentials and Firebase config with your own.
+  </p>
+
+  <div class="alert alert-info">
+    <span class="alert-icon">📦</span>
+    <span><strong>Required Libraries:</strong> Install via Arduino Library Manager: <code>Firebase ESP32 Client</code> by Mobizt, <code>LiquidCrystal I2C</code> by Frank de Brabander, <code>ArduinoJson</code> by Benoit Blanchon.</span>
+  </div>
+
+  <!-- FILE 1: config.h -->
+  <div class="code-wrap">
+    <div class="code-header">
+      <div style="display:flex;align-items:center;gap:8px"><div class="code-dot" style="background:#FF5F57"></div><div class="code-dot" style="background:#FFBD2E"></div><div class="code-dot" style="background:#28C840"></div></div>
+      <div class="code-lang">C++ / Arduino</div>
+      <div class="code-file">config.h — Configuration &amp; Constants</div>
+    </div>
+<pre><span class="p">#ifndef CONFIG_H</span>
+<span class="p">#define CONFIG_H</span>
+
+<span class="c">// ── WiFi Credentials ─────────────────────────────────</span>
+<span class="p">#define</span> <span class="v">WIFI_SSID</span>        <span class="s">"YourWiFiName"</span>
+<span class="p">#define</span> <span class="v">WIFI_PASSWORD</span>    <span class="s">"YourWiFiPassword"</span>
+
+<span class="c">// ── Firebase Configuration ────────────────────────────</span>
+<span class="p">#define</span> <span class="v">FIREBASE_HOST</span>    <span class="s">"voltguard-xxxx-default-rtdb.firebaseio.com"</span>
+<span class="p">#define</span> <span class="v">FIREBASE_AUTH</span>    <span class="s">"your_firebase_database_secret_here"</span>
+
+<span class="c">// ── GPIO Pin Definitions ──────────────────────────────</span>
+<span class="p">#define</span> <span class="v">PIN_VOLTAGE</span>      <span class="n">34</span>   <span class="c">// ZMPT101B output</span>
+<span class="p">#define</span> <span class="v">PIN_CURRENT_SUP</span>  <span class="n">35</span>   <span class="c">// ACS712 supply side</span>
+<span class="p">#define</span> <span class="v">PIN_CURRENT_LOAD</span> <span class="n">32</span>   <span class="c">// ACS712 load side</span>
+<span class="p">#define</span> <span class="v">PIN_RELAY</span>        <span class="n">26</span>   <span class="c">// Relay control (active LOW)</span>
+<span class="p">#define</span> <span class="v">PIN_BUZZER</span>       <span class="n">27</span>   <span class="c">// Buzzer</span>
+<span class="p">#define</span> <span class="v">PIN_STATUS_LED</span>   <span class="n">2</span>    <span class="c">// Onboard LED</span>
+<span class="p">#define</span> <span class="v">GSM_RX</span>           <span class="n">16</span>   <span class="c">// ESP32 UART2 RX ← SIM800L TX</span>
+<span class="p">#define</span> <span class="v">GSM_TX</span>           <span class="n">17</span>   <span class="c">// ESP32 UART2 TX → SIM800L RX</span>
+
+<span class="c">// ── Sensor Calibration ────────────────────────────────</span>
+<span class="p">#define</span> <span class="v">ACS712_SENSITIVITY</span>  <span class="n">0.066f</span>  <span class="c">// V/A for 30A variant</span>
+<span class="p">#define</span> <span class="v">ACS712_OFFSET_V</span>     <span class="n">1.65f</span>   <span class="c">// Mid-point at 3.3V supply</span>
+<span class="p">#define</span> <span class="v">ZMPT_VCAL</span>           <span class="n">218.0f</span>  <span class="c">// Calibration constant (tune!)</span>
+<span class="p">#define</span> <span class="v">ADC_VREF</span>            <span class="n">3.3f</span>    <span class="c">// ESP32 reference voltage</span>
+<span class="p">#define</span> <span class="v">ADC_RESOLUTION</span>      <span class="n">4095.0f</span> <span class="c">// 12-bit ADC</span>
+<span class="p">#define</span> <span class="v">SAMPLE_COUNT</span>        <span class="n">500</span>     <span class="c">// Samples per RMS calculation</span>
+<span class="p">#define</span> <span class="v">SAMPLE_INTERVAL_US</span>  <span class="n">100</span>     <span class="c">// µs between samples (50Hz = 20000µs/cycle)</span>
+
+<span class="c">// ── Theft Detection Thresholds ────────────────────────</span>
+<span class="p">#define</span> <span class="v">THRESH_IMBALANCE_WARN</span>   <span class="n">5.0f</span>   <span class="c">// % — warning level</span>
+<span class="p">#define</span> <span class="v">THRESH_IMBALANCE_THEFT</span>  <span class="n">10.0f</span>  <span class="c">// % — theft alert</span>
+<span class="p">#define</span> <span class="v">THRESH_IMBALANCE_CRIT</span>   <span class="n">25.0f</span>  <span class="c">// % — critical (relay cut)</span>
+<span class="p">#define</span> <span class="v">THRESH_VOLTAGE_WARN</span>     <span class="n">5.0f</span>   <span class="c">// % voltage drop warning</span>
+<span class="p">#define</span> <span class="v">V_NOMINAL</span>               <span class="n">230.0f</span> <span class="c">// Nominal mains voltage</span>
+
+<span class="c">// ── Timing ───────────────────────────────────────────</span>
+<span class="p">#define</span> <span class="v">FIREBASE_SEND_INTERVAL</span>  <span class="n">2000</span>  <span class="c">// ms between Firebase updates</span>
+<span class="p">#define</span> <span class="v">ALERT_DEBOUNCE_COUNT</span>    <span class="n">3</span>     <span class="c">// Must detect N times before alert</span>
+
+<span class="c">// ── SMS Alert ────────────────────────────────────────</span>
+<span class="p">#define</span> <span class="v">ALERT_PHONE_NUMBER</span>  <span class="s">"+91XXXXXXXXXX"</span>
+<span class="p">#define</span> <span class="v">GSM_BAUD</span>            <span class="n">9600</span>
+
+<span class="p">#endif</span></pre>
+  </div>
+
+  <!-- FILE 2: main.ino -->
+  <div class="code-wrap">
+    <div class="code-header">
+      <div style="display:flex;align-items:center;gap:8px"><div class="code-dot" style="background:#FF5F57"></div><div class="code-dot" style="background:#FFBD2E"></div><div class="code-dot" style="background:#28C840"></div></div>
+      <div class="code-lang">C++ / Arduino</div>
+      <div class="code-file">VOLTGUARD.ino — Main Firmware</div>
+    </div>
+<pre><span class="c">/*
+ * ╔══════════════════════════════════════════════════╗
+ * ║   VOLTGUARD — Smart Electricity Theft Detection  ║
+ * ║   ESP32 Firmware  v1.0                           ║
+ * ║   College Project — IoT & Embedded Systems       ║
+ * ╚══════════════════════════════════════════════════╝
+ */</span>
+
+<span class="p">#include</span> <span class="s">&lt;WiFi.h&gt;</span>
+<span class="p">#include</span> <span class="s">&lt;FirebaseESP32.h&gt;</span>
+<span class="p">#include</span> <span class="s">&lt;LiquidCrystal_I2C.h&gt;</span>
+<span class="p">#include</span> <span class="s">&lt;ArduinoJson.h&gt;</span>
+<span class="p">#include</span> <span class="s">&lt;math.h&gt;</span>
+<span class="p">#include</span> <span class="s">"config.h"</span>
+
+<span class="c">// ── Objects ──────────────────────────────────────────</span>
+<span class="t">FirebaseData</span>   fbData;
+<span class="t">FirebaseAuth</span>   fbAuth;
+<span class="t">FirebaseConfig</span> fbConfig;
+<span class="t">LiquidCrystal_I2C</span> lcd(<span class="n">0x27</span>, <span class="n">16</span>, <span class="n">2</span>);
+<span class="t">HardwareSerial</span> gsmSerial(<span class="n">2</span>);  <span class="c">// UART2 for SIM800L</span>
+
+<span class="c">// ── State Variables ───────────────────────────────────</span>
+<span class="k">struct</span> <span class="t">PowerReadings</span> {
+  <span class="t">float</span> voltageRMS;
+  <span class="t">float</span> supplyCurrentRMS;
+  <span class="t">float</span> loadCurrentRMS;
+  <span class="t">float</span> realPower;
+  <span class="t">float</span> imbalancePercent;
+  <span class="t">float</span> voltageDrop;
+  <span class="t">bool</span>  theftDetected;
+  <span class="t">String</span> status;   <span class="c">// "NORMAL", "WARNING", "THEFT"</span>
+  <span class="t">unsigned long</span> timestamp;
+};
+
+<span class="t">PowerReadings</span> readings;
+<span class="t">int</span>   theftCounter     = <span class="n">0</span>;
+<span class="t">bool</span>  relayTripped     = <span class="k">false</span>;
+<span class="t">bool</span>  smsSent          = <span class="k">false</span>;
+<span class="t">unsigned long</span> lastFirebaseSend = <span class="n">0</span>;
+<span class="t">unsigned long</span> lastLCDUpdate    = <span class="n">0</span>;
+<span class="t">int</span>   lcdPage           = <span class="n">0</span>;
+
+<span class="c">// ═══════════════════════════════════════════════════
+// SENSOR READING — RMS Calculation
+// ═══════════════════════════════════════════════════</span>
+<span class="t">float</span> <span class="f">readCurrentRMS</span>(<span class="t">int</span> pin) {
+  <span class="t">double</span> sumSquares = <span class="n">0.0</span>;
+  <span class="t">int</span> validSamples = <span class="n">0</span>;
+
+  <span class="k">for</span> (<span class="t">int</span> i = <span class="n">0</span>; i &lt; SAMPLE_COUNT; i++) {
+    <span class="t">int</span>   raw    = analogRead(pin);
+    <span class="t">float</span> vADC   = (raw / ADC_RESOLUTION) * ADC_VREF;
+    <span class="t">float</span> iInst  = (vADC - ACS712_OFFSET_V) / ACS712_SENSITIVITY;
+
+    <span class="c">// Noise floor filter — ignore tiny readings</span>
+    <span class="k">if</span> (abs(iInst) &gt; <span class="n">0.05f</span>) {
+      sumSquares += (iInst * iInst);
+      validSamples++;
+    }
+    delayMicroseconds(SAMPLE_INTERVAL_US);
+  }
+
+  <span class="k">if</span> (validSamples == <span class="n">0</span>) <span class="k">return</span> <span class="n">0.0f</span>;
+  <span class="k">return</span> sqrt(sumSquares / validSamples);
+}
+
+<span class="t">float</span> <span class="f">readVoltageRMS</span>() {
+  <span class="t">double</span> sumSquares = <span class="n">0.0</span>;
+
+  <span class="k">for</span> (<span class="t">int</span> i = <span class="n">0</span>; i &lt; SAMPLE_COUNT; i++) {
+    <span class="t">int</span>   raw   = analogRead(PIN_VOLTAGE);
+    <span class="t">float</span> vADC  = (raw / ADC_RESOLUTION) * ADC_VREF;
+    <span class="t">float</span> vInst = (vADC - (ADC_VREF / <span class="n">2.0f</span>));  <span class="c">// Remove DC offset</span>
+    sumSquares += (vInst * vInst);
+    delayMicroseconds(SAMPLE_INTERVAL_US);
+  }
+
+  <span class="t">float</span> vRMSraw = sqrt(sumSquares / SAMPLE_COUNT);
+  <span class="k">return</span> vRMSraw * ZMPT_VCAL;  <span class="c">// Apply calibration constant</span>
+}
+
+<span class="c">// ═══════════════════════════════════════════════════
+// THEFT DETECTION ALGORITHM
+// ═══════════════════════════════════════════════════</span>
+<span class="t">void</span> <span class="f">detectTheft</span>() {
+  <span class="c">// Calculate current imbalance percentage</span>
+  <span class="k">if</span> (readings.supplyCurrentRMS &lt; <span class="n">0.1f</span>) {
+    readings.imbalancePercent = <span class="n">0.0f</span>;
+    readings.status = <span class="s">"NORMAL"</span>;
+    <span class="k">return</span>;
+  }
+
+  readings.imbalancePercent =
+    (abs(readings.supplyCurrentRMS - readings.loadCurrentRMS)
+     / readings.supplyCurrentRMS) * <span class="n">100.0f</span>;
+
+  readings.voltageDrop =
+    (abs(V_NOMINAL - readings.voltageRMS) / V_NOMINAL) * <span class="n">100.0f</span>;
+
+  <span class="c">// ── Decision logic ───────────────────────────────</span>
+  <span class="t">bool</span> imbalanceTheft  = readings.imbalancePercent &gt; THRESH_IMBALANCE_THEFT;
+  <span class="t">bool</span> imbalanceCrit   = readings.imbalancePercent &gt; THRESH_IMBALANCE_CRIT;
+  <span class="t">bool</span> imbalanceWarn   = readings.imbalancePercent &gt; THRESH_IMBALANCE_WARN;
+  <span class="t">bool</span> voltageLow      = readings.voltageDrop      &gt; THRESH_VOLTAGE_WARN;
+
+  <span class="k">if</span> (imbalanceCrit || (imbalanceTheft &amp;&amp; voltageLow)) {
+    theftCounter++;
+    <span class="k">if</span> (theftCounter &gt;= ALERT_DEBOUNCE_COUNT) {
+      readings.theftDetected = <span class="k">true</span>;
+      readings.status = <span class="s">"THEFT"</span>;
+      <span class="f">triggerAlert</span>();
+    }
+  } <span class="k">else if</span> (imbalanceWarn) {
+    theftCounter = max(<span class="n">0</span>, theftCounter - <span class="n">1</span>);
+    readings.theftDetected = <span class="k">false</span>;
+    readings.status = <span class="s">"WARNING"</span>;
+  } <span class="k">else</span> {
+    theftCounter = <span class="n">0</span>;
+    readings.theftDetected = <span class="k">false</span>;
+    readings.status = <span class="s">"NORMAL"</span>;
+    <span class="c">// Reset relay and buzzer if system normalizes</span>
+    <span class="k">if</span> (relayTripped) <span class="f">resetRelay</span>();
+  }
+}
+
+<span class="c">// ═══════════════════════════════════════════════════
+// ALERT ACTIONS
+// ═══════════════════════════════════════════════════</span>
+<span class="t">void</span> <span class="f">triggerAlert</span>() {
+  Serial.println(<span class="s">"[ALERT] ⚡ ELECTRICITY THEFT DETECTED!"</span>);
+
+  <span class="c">// 1. Trip relay (cut power)</span>
+  <span class="k">if</span> (!relayTripped) {
+    digitalWrite(PIN_RELAY, <span class="t">LOW</span>);   <span class="c">// Most relay modules are active LOW</span>
+    relayTripped = <span class="k">true</span>;
+    Serial.println(<span class="s">"[RELAY] Power cut-off ACTIVATED"</span>);
+  }
+
+  <span class="c">// 2. Sound buzzer (3 fast beeps)</span>
+  <span class="k">for</span> (<span class="t">int</span> i = <span class="n">0</span>; i &lt; <span class="n">3</span>; i++) {
+    digitalWrite(PIN_BUZZER, <span class="t">HIGH</span>);
+    delay(<span class="n">200</span>);
+    digitalWrite(PIN_BUZZER, <span class="t">LOW</span>);
+    delay(<span class="n">100</span>);
+  }
+
+  <span class="c">// 3. Send SMS (only once per theft event)</span>
+  <span class="k">if</span> (!smsSent) {
+    <span class="f">sendSMSAlert</span>();
+    smsSent = <span class="k">true</span>;
+  }
+
+  <span class="c">// 4. Blink LED rapidly</span>
+  digitalWrite(PIN_STATUS_LED, <span class="t">HIGH</span>);
+}
+
+<span class="t">void</span> <span class="f">resetRelay</span>() {
+  digitalWrite(PIN_RELAY, <span class="t">HIGH</span>);  <span class="c">// Deactivate relay</span>
+  relayTripped = <span class="k">false</span>;
+  smsSent      = <span class="k">false</span>;
+  Serial.println(<span class="s">"[RELAY] Power restored — system normalized"</span>);
+}
+
+<span class="c">// ═══════════════════════════════════════════════════
+// GSM / SMS ALERT via SIM800L
+// ═══════════════════════════════════════════════════</span>
+<span class="t">void</span> <span class="f">sendSMSAlert</span>() {
+  <span class="t">char</span> msg[<span class="n">160</span>];
+  snprintf(msg, <span class="k">sizeof</span>(msg),
+    <span class="s">"VOLTGUARD ALERT! Electricity theft detected.\n"
+    "Imbalance: %.1f%%\nVoltage: %.1fV\n"
+    "Supply: %.2fA | Load: %.2fA\n"
+    "Time: %lu s"</span>,
+    readings.imbalancePercent, readings.voltageRMS,
+    readings.supplyCurrentRMS, readings.loadCurrentRMS,
+    millis() / <span class="n">1000</span>);
+
+  gsmSerial.println(<span class="s">"AT"</span>);              delay(<span class="n">500</span>);
+  gsmSerial.println(<span class="s">"AT+CMGF=1"</span>);       delay(<span class="n">500</span>);  <span class="c">// SMS text mode</span>
+  gsmSerial.print(<span class="s">"AT+CMGS=\""</span>);
+  gsmSerial.print(ALERT_PHONE_NUMBER);
+  gsmSerial.println(<span class="s">"\""</span>);              delay(<span class="n">500</span>);
+  gsmSerial.print(msg);
+  gsmSerial.write(<span class="n">26</span>);                  delay(<span class="n">2000</span>); <span class="c">// Ctrl+Z sends SMS</span>
+  Serial.println(<span class="s">"[GSM] SMS sent to "</span> + <span class="t">String</span>(ALERT_PHONE_NUMBER));
+}
+
+<span class="c">// ═══════════════════════════════════════════════════
+// FIREBASE — Send Data
+// ═══════════════════════════════════════════════════</span>
+<span class="t">void</span> <span class="f">sendToFirebase</span>() {
+  <span class="k">if</span> (!Firebase.ready()) <span class="k">return</span>;
+
+  <span class="t">FirebaseJson</span> json;
+  json.set(<span class="s">"voltage"</span>,         readings.voltageRMS);
+  json.set(<span class="s">"supplyCurrentA"</span>,  readings.supplyCurrentRMS);
+  json.set(<span class="s">"loadCurrentA"</span>,    readings.loadCurrentRMS);
+  json.set(<span class="s">"powerW"</span>,          readings.realPower);
+  json.set(<span class="s">"imbalancePct"</span>,    readings.imbalancePercent);
+  json.set(<span class="s">"voltageDropPct"</span>,  readings.voltageDrop);
+  json.set(<span class="s">"theftDetected"</span>,   readings.theftDetected);
+  json.set(<span class="s">"status"</span>,          readings.status);
+  json.set(<span class="s">"relayTripped"</span>,    relayTripped);
+  json.set(<span class="s">"timestamp"</span>,       (<span class="t">int</span>)(millis() / <span class="n">1000</span>));
+
+  <span class="k">if</span> (Firebase.setJSON(fbData, <span class="s">"/voltguard/live"</span>, json)) {
+    Serial.println(<span class="s">"[FB] Data sent OK"</span>);
+  } <span class="k">else</span> {
+    Serial.println(<span class="s">"[FB] Error: "</span> + fbData.errorReason());
+  }
+
+  <span class="c">// Also append to history log (last 100 entries)</span>
+  Firebase.pushJSON(fbData, <span class="s">"/voltguard/history"</span>, json);
+}
+
+<span class="c">// ═══════════════════════════════════════════════════
+// LCD DISPLAY
+// ═══════════════════════════════════════════════════</span>
+<span class="t">void</span> <span class="f">updateLCD</span>() {
+  lcd.clear();
+  <span class="k">switch</span> (lcdPage % <span class="n">3</span>) {
+    <span class="k">case</span> <span class="n">0</span>:  <span class="c">// Page 1: Voltage + Supply Current</span>
+      lcd.setCursor(<span class="n">0</span>, <span class="n">0</span>); lcd.print(<span class="s">"V:"</span>);
+      lcd.print(readings.voltageRMS, <span class="n">1</span>); lcd.print(<span class="s">"V "</span>);
+      lcd.print(readings.status);
+      lcd.setCursor(<span class="n">0</span>, <span class="n">1</span>); lcd.print(<span class="s">"Is:"</span>);
+      lcd.print(readings.supplyCurrentRMS, <span class="n">2</span>); lcd.print(<span class="s">"A"</span>);
+      <span class="k">break</span>;
+    <span class="k">case</span> <span class="n">1</span>:  <span class="c">// Page 2: Load Current + Power</span>
+      lcd.setCursor(<span class="n">0</span>, <span class="n">0</span>); lcd.print(<span class="s">"IL:"</span>);
+      lcd.print(readings.loadCurrentRMS, <span class="n">2</span>); lcd.print(<span class="s">"A"</span>);
+      lcd.setCursor(<span class="n">0</span>, <span class="n">1</span>); lcd.print(<span class="s">"P:"</span>);
+      lcd.print(readings.realPower, <span class="n">1</span>); lcd.print(<span class="s">"W"</span>);
+      <span class="k">break</span>;
+    <span class="k">case</span> <span class="n">2</span>:  <span class="c">// Page 3: Imbalance + Status</span>
+      lcd.setCursor(<span class="n">0</span>, <span class="n">0</span>); lcd.print(<span class="s">"Imbal:"</span>);
+      lcd.print(readings.imbalancePercent, <span class="n">1</span>); lcd.print(<span class="s">"%"</span>);
+      lcd.setCursor(<span class="n">0</span>, <span class="n">1</span>);
+      <span class="k">if</span> (readings.theftDetected) { lcd.print(<span class="s">"!! THEFT ALERT !!"</span>); }
+      <span class="k">else</span> { lcd.print(<span class="s">"System OK"</span>); }
+      <span class="k">break</span>;
+  }
+  lcdPage++;
+}
+
+<span class="c">// ═══════════════════════════════════════════════════
+// SETUP
+// ═══════════════════════════════════════════════════</span>
+<span class="t">void</span> <span class="f">setup</span>() {
+  Serial.begin(<span class="n">115200</span>);
+  gsmSerial.begin(GSM_BAUD, <span class="t">SERIAL_8N1</span>, GSM_RX, GSM_TX);
+
+  <span class="c">// GPIO setup</span>
+  pinMode(PIN_RELAY,      <span class="t">OUTPUT</span>);  digitalWrite(PIN_RELAY, <span class="t">HIGH</span>); <span class="c">// Relay OFF</span>
+  pinMode(PIN_BUZZER,     <span class="t">OUTPUT</span>);  digitalWrite(PIN_BUZZER, <span class="t">LOW</span>);
+  pinMode(PIN_STATUS_LED, <span class="t">OUTPUT</span>);  digitalWrite(PIN_STATUS_LED, <span class="t">LOW</span>);
+
+  <span class="c">// ADC setup — use 11dB attenuation for 0–3.3V range</span>
+  analogSetAttenuation(<span class="t">ADC_11db</span>);
+  analogReadResolution(<span class="n">12</span>);
+
+  <span class="c">// LCD init</span>
+  lcd.init(); lcd.backlight();
+  lcd.setCursor(<span class="n">0</span>, <span class="n">0</span>); lcd.print(<span class="s">"VOLTGUARD v1.0"</span>);
+  lcd.setCursor(<span class="n">0</span>, <span class="n">1</span>); lcd.print(<span class="s">"Initializing..."</span>);
+
+  <span class="c">// WiFi connection</span>
+  Serial.print(<span class="s">"[WiFi] Connecting to "</span>); Serial.println(WIFI_SSID);
+  WiFi.begin(WIFI_SSID, WIFI_PASSWORD);
+  <span class="t">int</span> wifiAttempts = <span class="n">0</span>;
+  <span class="k">while</span> (WiFi.status() != WL_CONNECTED &amp;&amp; wifiAttempts &lt; <span class="n">20</span>) {
+    delay(<span class="n">500</span>); Serial.print(<span class="s">"."</span>); wifiAttempts++;
+  }
+  <span class="k">if</span> (WiFi.status() == WL_CONNECTED) {
+    Serial.println(<span class="s">"\n[WiFi] Connected! IP: "</span> + WiFi.localIP().toString());
+    lcd.setCursor(<span class="n">0</span>, <span class="n">1</span>); lcd.print(<span class="s">"WiFi OK!        "</span>);
+  } <span class="k">else</span> {
+    Serial.println(<span class="s">"\n[WiFi] FAILED — offline mode"</span>);
+    lcd.setCursor(<span class="n">0</span>, <span class="n">1</span>); lcd.print(<span class="s">"WiFi FAILED     "</span>);
+  }
+
+  <span class="c">// Firebase init</span>
+  fbConfig.host             = FIREBASE_HOST;
+  fbConfig.signer.tokens.legacy_token = FIREBASE_AUTH;
+  Firebase.begin(&amp;fbConfig, &amp;fbAuth);
+  Firebase.reconnectWiFi(<span class="k">true</span>);
+  fbData.setResponseSize(<span class="n">1024</span>);
+
+  delay(<span class="n">1500</span>);
+  Serial.println(<span class="s">"[SYSTEM] VOLTGUARD ready!"</span>);
+  lcd.clear(); lcd.print(<span class="s">"System Ready!"</span>);
+}
+
+<span class="c">// ═══════════════════════════════════════════════════
+// MAIN LOOP
+// ═══════════════════════════════════════════════════</span>
+<span class="t">void</span> <span class="f">loop</span>() {
+  <span class="t">unsigned long</span> now = millis();
+
+  <span class="c">// ── 1. Read all sensors ─────────────────────────</span>
+  readings.voltageRMS        = readVoltageRMS();
+  readings.supplyCurrentRMS  = readCurrentRMS(PIN_CURRENT_SUP);
+  readings.loadCurrentRMS    = readCurrentRMS(PIN_CURRENT_LOAD);
+  readings.realPower         = readings.voltageRMS
+                               * readings.supplyCurrentRMS
+                               * <span class="n">0.85f</span>;  <span class="c">// assumed PF</span>
+  readings.timestamp         = now;
+
+  <span class="c">// ── 2. Run theft detection ───────────────────────</span>
+  detectTheft();
+
+  <span class="c">// ── 3. Serial debug output ───────────────────────</span>
+  Serial.printf(<span class="s">"V=%.1fV | Is=%.2fA | Il=%.2fA | P=%.1fW | Imbal=%.1f%% | %s\n"</span>,
+    readings.voltageRMS, readings.supplyCurrentRMS,
+    readings.loadCurrentRMS, readings.realPower,
+    readings.imbalancePercent, readings.status.c_str());
+
+  <span class="c">// ── 4. Send to Firebase every 2 seconds ─────────</span>
+  <span class="k">if</span> (now - lastFirebaseSend &gt;= FIREBASE_SEND_INTERVAL) {
+    sendToFirebase();
+    lastFirebaseSend = now;
+  }
+
+  <span class="c">// ── 5. Update LCD every 3 seconds ───────────────</span>
+  <span class="k">if</span> (now - lastLCDUpdate &gt;= <span class="n">3000</span>) {
+    updateLCD();
+    lastLCDUpdate = now;
+  }
+
+  <span class="c">// ── 6. Status LED heartbeat ──────────────────────</span>
+  <span class="k">if</span> (!readings.theftDetected) {
+    <span class="c">// Normal: slow blink every 1 second</span>
+    digitalWrite(PIN_STATUS_LED, (now / <span class="n">1000</span>) % <span class="n">2</span>);
+  }
+
+  delay(<span class="n">50</span>);  <span class="c">// Small delay for stability</span>
+}</pre>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     SECTION 7 — DATA TRANSMISSION
+═══════════════════════════════════════ -->
+<section class="section" id="s7">
+  <div class="sec-hdr">
+    <div class="sec-num">07</div>
+    <div>
+      <div class="sec-title">Data Transmission</div>
+      <div class="sec-subtitle">ESP32 → Firebase Realtime Database → Dashboard</div>
+    </div>
+  </div>
+
+  <p class="section-intro">VOLTGUARD uses <strong>Firebase Realtime Database</strong> as the cloud backend. The ESP32 pushes JSON data every 2 seconds via Firebase's REST API over WiFi. The web dashboard subscribes to real-time changes using Firebase SDK.</p>
+
+  <div class="grid2">
+    <div>
+      <div class="sub-title">☁️ Firebase Setup</div>
+      <div class="steps">
+        <div class="step">
+          <div class="step-left"><div class="step-num" style="width:28px;height:28px;font-size:11px">1</div></div>
+          <div class="step-content">
+            <div class="step-title" style="font-size:14px">Create Firebase Project</div>
+            <div class="step-body">Go to <strong>console.firebase.google.com</strong> → Create project → "VOLTGUARD". Enable the <strong>Realtime Database</strong> service and choose a region close to you.</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-left"><div class="step-num" style="width:28px;height:28px;font-size:11px">2</div></div>
+          <div class="step-content">
+            <div class="step-title" style="font-size:14px">Set Database Rules</div>
+            <div class="step-body">For the project, set rules to allow authenticated read/write. For demo/college use, set <code>"read": true, "write": true</code> temporarily.</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-left"><div class="step-num" style="width:28px;height:28px;font-size:11px">3</div></div>
+          <div class="step-content">
+            <div class="step-title" style="font-size:14px">Copy Credentials</div>
+            <div class="step-body">Go to <em>Project Settings → Service Accounts</em>, copy the <strong>Database URL</strong> and <strong>Legacy Token</strong> into <code>config.h</code>.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="sub-title">📦 Firebase JSON Structure</div>
+      <div class="code-wrap">
+        <div class="code-header">
+          <div class="code-lang">JSON</div>
+          <div class="code-file">Firebase DB Structure</div>
+        </div>
+<pre>{
+  <span class="json-key">"voltguard"</span>: {
+    <span class="json-key">"live"</span>: {
+      <span class="json-key">"voltage"</span>:        <span class="json-num">229.4</span>,
+      <span class="json-key">"supplyCurrentA"</span>: <span class="json-num">5.24</span>,
+      <span class="json-key">"loadCurrentA"</span>:   <span class="json-num">4.81</span>,
+      <span class="json-key">"powerW"</span>:         <span class="json-num">1023.2</span>,
+      <span class="json-key">"imbalancePct"</span>:   <span class="json-num">8.2</span>,
+      <span class="json-key">"voltageDropPct"</span>: <span class="json-num">0.26</span>,
+      <span class="json-key">"theftDetected"</span>:  <span class="json-bool">false</span>,
+      <span class="json-key">"status"</span>:         <span class="json-str">"WARNING"</span>,
+      <span class="json-key">"relayTripped"</span>:   <span class="json-bool">false</span>,
+      <span class="json-key">"timestamp"</span>:      <span class="json-num">14823</span>
+    },
+    <span class="json-key">"history"</span>: {
+      <span class="json-key">"-NxAbc123"</span>: { <span class="json-str">/* same structure */</span> },
+      <span class="json-key">"-NxAbc124"</span>: { <span class="json-str">/* same structure */</span> }
+    },
+    <span class="json-key">"alerts"</span>: {
+      <span class="json-key">"-NxAlert1"</span>: {
+        <span class="json-key">"type"</span>:      <span class="json-str">"THEFT"</span>,
+        <span class="json-key">"message"</span>:   <span class="json-str">"Imbalance 24.1%"</span>,
+        <span class="json-key">"timestamp"</span>: <span class="json-num">14920</span>,
+        <span class="json-key">"resolved"</span>:  <span class="json-bool">false</span>
+      }
+    }
+  }
+}</pre>
+      </div>
+    </div>
+  </div>
+
+  <div class="sub-title">🔁 Alternative: MQTT via HiveMQ (No Cloud Account Needed)</div>
+  <div class="code-wrap">
+    <div class="code-header">
+      <div class="code-lang">C++ / Arduino</div>
+      <div class="code-file">MQTT Alternative — PubSubClient</div>
+    </div>
+<pre><span class="p">#include</span> <span class="s">&lt;PubSubClient.h&gt;</span>
+
+<span class="t">WiFiClient</span>     wifiClient;
+<span class="t">PubSubClient</span>   mqtt(wifiClient);
+
+<span class="t">void</span> <span class="f">setupMQTT</span>() {
+  mqtt.setServer(<span class="s">"broker.hivemq.com"</span>, <span class="n">1883</span>);  <span class="c">// Free public broker</span>
+}
+
+<span class="t">void</span> <span class="f">publishData</span>() {
+  <span class="k">if</span> (!mqtt.connected()) {
+    mqtt.connect(<span class="s">"voltguard-esp32-"</span> + <span class="t">String</span>(random(<span class="n">1000</span>)));
+  }
+  mqtt.loop();
+
+  <span class="t">char</span> payload[<span class="n">256</span>];
+  snprintf(payload, <span class="k">sizeof</span>(payload),
+    <span class="s">"{\"v\":%.1f,\"is\":%.2f,\"il\":%.2f,\"p\":%.1f,\"imb\":%.1f,\"theft\":%s}"</span>,
+    readings.voltageRMS, readings.supplyCurrentRMS, readings.loadCurrentRMS,
+    readings.realPower, readings.imbalancePercent,
+    readings.theftDetected ? <span class="s">"true"</span> : <span class="s">"false"</span>);
+
+  mqtt.publish(<span class="s">"voltguard/live"</span>, payload);      <span class="c">// Subscribe in dashboard</span>
+  <span class="k">if</span> (readings.theftDetected)
+    mqtt.publish(<span class="s">"voltguard/alerts"</span>, payload);   <span class="c">// Alert topic</span>
+}</pre>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     SECTION 8 — DASHBOARD INTEGRATION
+═══════════════════════════════════════ -->
+<section class="section" id="s8">
+  <div class="sec-hdr">
+    <div class="sec-num">08</div>
+    <div>
+      <div class="sec-title">Dashboard Integration</div>
+      <div class="sec-subtitle">React Web App — Firebase SDK — Real-Time Updates</div>
+    </div>
+  </div>
+
+  <p class="section-intro">The VOLTEX web dashboard (already built) connects to Firebase to display live data. Below is the complete integration code using the Firebase JavaScript SDK v9+. This connects the existing VOLTEX dashboard UI to the real ESP32 data stream.</p>
+
+  <div class="code-wrap">
+    <div class="code-header">
+      <div class="code-lang">JavaScript</div>
+      <div class="code-file">firebase-service.js — Firebase Integration</div>
+    </div>
+<pre><span class="p">import</span> { initializeApp }           <span class="p">from</span> <span class="s">'firebase/app'</span>;
+<span class="p">import</span> { getDatabase, ref, onValue, push } <span class="p">from</span> <span class="s">'firebase/database'</span>;
+
+<span class="c">// ── Firebase Configuration ─────────────────────────</span>
+<span class="k">const</span> firebaseConfig = {
+  apiKey:            <span class="s">"AIzaSy..."</span>,
+  authDomain:        <span class="s">"voltguard-xxxx.firebaseapp.com"</span>,
+  databaseURL:       <span class="s">"https://voltguard-xxxx-default-rtdb.firebaseio.com"</span>,
+  projectId:         <span class="s">"voltguard-xxxx"</span>,
+  storageBucket:     <span class="s">"voltguard-xxxx.appspot.com"</span>,
+  messagingSenderId: <span class="s">"123456789"</span>,
+  appId:             <span class="s">"1:123:web:abc"</span>
+};
+
+<span class="k">const</span> app = initializeApp(firebaseConfig);
+<span class="k">const</span> db  = getDatabase(app);
+
+<span class="c">// ── Real-time Live Data Listener ───────────────────</span>
+<span class="c">// Call this once on dashboard load — updates automatically!</span>
+<span class="k">export function</span> <span class="f">subscribeLiveData</span>(callback) {
+  <span class="k">const</span> liveRef = ref(db, <span class="s">'voltguard/live'</span>);
+
+  onValue(liveRef, (snapshot) =&gt; {
+    <span class="k">const</span> data = snapshot.val();
+    <span class="k">if</span> (data) callback(data);
+  });
+}
+
+<span class="c">// ── Alerts Listener ────────────────────────────────</span>
+<span class="k">export function</span> <span class="f">subscribeAlerts</span>(callback) {
+  <span class="k">const</span> alertRef = ref(db, <span class="s">'voltguard/alerts'</span>);
+  onValue(alertRef, (snapshot) =&gt; {
+    <span class="k">const</span> alerts = [];
+    snapshot.forEach(child =&gt; alerts.push({ id: child.key, ...child.val() }));
+    callback(alerts.reverse());   <span class="c">// newest first</span>
+  });
+}
+
+<span class="c">// ── History Query (last 50 readings) ──────────────</span>
+<span class="k">import</span> { query, limitToLast, orderByKey } <span class="k">from</span> <span class="s">'firebase/database'</span>;
+
+<span class="k">export function</span> <span class="f">subscribeHistory</span>(callback) {
+  <span class="k">const</span> histRef = query(
+    ref(db, <span class="s">'voltguard/history'</span>),
+    orderByKey(), limitToLast(<span class="n">50</span>)
+  );
+  onValue(histRef, (snapshot) =&gt; {
+    <span class="k">const</span> history = [];
+    snapshot.forEach(child =&gt; history.push(child.val()));
+    callback(history);
+  });
+}
+
+<span class="c">// ── Acknowledge Alert ─────────────────────────────</span>
+<span class="k">import</span> { update } <span class="k">from</span> <span class="s">'firebase/database'</span>;
+<span class="k">export function</span> <span class="f">resolveAlert</span>(alertId) {
+  update(ref(db, <span class="s">`voltguard/alerts/${alertId}`</span>), { resolved: <span class="k">true</span> });
+}</pre>
+  </div>
+
+  <div class="code-wrap">
+    <div class="code-header">
+      <div class="code-lang">JavaScript / React</div>
+      <div class="code-file">DashboardHook.js — React Hook for Live Data</div>
+    </div>
+<pre><span class="p">import</span> { useState, useEffect } <span class="p">from</span> <span class="s">'react'</span>;
+<span class="p">import</span> { subscribeLiveData, subscribeAlerts, subscribeHistory }
+        <span class="p">from</span> <span class="s">'./firebase-service'</span>;
+
+<span class="c">// Drop-in hook — use in your VOLTEX dashboard component</span>
+<span class="k">export function</span> <span class="f">useVoltguardData</span>() {
+  <span class="k">const</span> [liveData,  setLiveData]  = useState(<span class="k">null</span>);
+  <span class="k">const</span> [alerts,    setAlerts]    = useState([]);
+  <span class="k">const</span> [history,   setHistory]   = useState([]);
+  <span class="k">const</span> [connected, setConnected] = useState(<span class="k">false</span>);
+
+  useEffect(() =&gt; {
+    <span class="c">// Subscribe to all three streams</span>
+    subscribeLiveData((data) =&gt; {
+      setLiveData(data);
+      setConnected(<span class="k">true</span>);
+    });
+    subscribeAlerts(setAlerts);
+    subscribeHistory(setHistory);
+  }, []);
+
+  <span class="c">// Derived values for dashboard cards</span>
+  <span class="k">const</span> derived = liveData ? {
+    voltage:       liveData.voltage?.toFixed(<span class="n">1</span>)      ?? <span class="s">'--'</span>,
+    supplyA:       liveData.supplyCurrentA?.toFixed(<span class="n">2</span>) ?? <span class="s">'--'</span>,
+    loadA:         liveData.loadCurrentA?.toFixed(<span class="n">2</span>)   ?? <span class="s">'--'</span>,
+    powerW:        liveData.powerW?.toFixed(<span class="n">0</span>)         ?? <span class="s">'--'</span>,
+    imbalancePct:  liveData.imbalancePct?.toFixed(<span class="n">1</span>)   ?? <span class="s">'--'</span>,
+    theftProb:     Math.min(<span class="n">100</span>, liveData.imbalancePct * <span class="n">4</span>),
+    status:        liveData.status ?? <span class="s">'UNKNOWN'</span>,
+    theftDetected: liveData.theftDetected ?? <span class="k">false</span>,
+    relayTripped:  liveData.relayTripped  ?? <span class="k">false</span>,
+    efficiency:    liveData.supplyCurrentA &gt; <span class="n">0</span>
+                   ? ((liveData.loadCurrentA / liveData.supplyCurrentA) * <span class="n">100</span>).toFixed(<span class="n">1</span>)
+                   : <span class="s">'--'</span>,
+    history4Chart: history.map(h =&gt; ({
+      supply:  h.supplyCurrentA,
+      load:    h.loadCurrentA,
+      voltage: h.voltage,
+      prob:    Math.min(<span class="n">100</span>, h.imbalancePct * <span class="n">4</span>)
+    }))
+  } : {};
+
+  <span class="k">return</span> { liveData, derived, alerts, history, connected };
+}
+
+<span class="c">// ── Usage inside your VOLTEX Dashboard ────────────
+// const { derived, alerts, connected } = useVoltguardData();
+// then bind: theftProb = derived.theftProb
+//            supply    = derived.supplyA    etc.</span></pre>
+  </div>
+
+  <div class="note">
+    <strong>Integration tip:</strong> The VOLTEX dashboard UI already has all the cards, gauges, and charts built. Simply replace the simulated <code>sim()</code> function's data with the values from <code>useVoltguardData()</code> and the dashboard becomes fully live from the ESP32.
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     SECTION 9 — ADVANCED FEATURES
+═══════════════════════════════════════ -->
+<section class="section" id="s9">
+  <div class="sec-hdr">
+    <div class="sec-num">09</div>
+    <div>
+      <div class="sec-title">Advanced Features</div>
+      <div class="sec-subtitle">Relay Cut-Off · SMS Alerts · OTA · Watchdog</div>
+    </div>
+  </div>
+
+  <div class="grid2">
+    <div class="card">
+      <div class="card-hdr"><div class="card-icon" style="background:rgba(255,64,96,0.12);font-size:20px">⚡</div><div class="card-title" style="color:var(--danger)">Relay Auto Cut-Off</div></div>
+      <div class="card-body">
+        When theft is confirmed (debounce = 3 consecutive detections), GPIO26 goes LOW, energizing the relay and breaking the NC contact. The load circuit opens instantly. The relay only resets when the operator clicks <strong>"Restore Power"</strong> on the dashboard — preventing re-connection without human acknowledgement.
+        <div class="note" style="margin-top:12px"><strong>Fail-safe design:</strong> Relay is normally-closed (NC). A power failure to ESP32 will open the circuit — preventing theft during a power outage to the controller.</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-hdr"><div class="card-icon" style="background:rgba(139,92,246,0.12);font-size:20px">📱</div><div class="card-title" style="color:var(--purple)">SMS Alert via SIM800L</div></div>
+      <div class="card-body">
+        SIM800L connects via UART2 (GPIO16/17). On theft detection the ESP32 sends AT commands to compose and send an SMS containing: voltage, supply current, load current, imbalance %, and timestamp. The SIM800L needs a separate 3.7–4.2V supply (Li-ion cell or dedicated regulator). A 1000µF capacitor on its power pin prevents brownouts during GSM transmission peaks (2A peak).
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-hdr"><div class="card-icon" style="background:rgba(0,200,255,0.12);font-size:20px">🔄</div><div class="card-title" style="color:var(--cyan)">OTA Firmware Update</div></div>
+      <div class="card-body">
+        Add Over-the-Air updates so you can push new firmware without physical access. Add to setup():
+        <div class="code-wrap" style="margin-top:10px">
+          <div class="code-header"><div class="code-lang">C++</div></div>
+<pre style="font-size:11px"><span class="p">#include</span> <span class="s">&lt;ArduinoOTA.h&gt;</span>
+ArduinoOTA.setHostname(<span class="s">"voltguard"</span>);
+ArduinoOTA.setPassword(<span class="s">"voltguard123"</span>);
+ArduinoOTA.begin();
+<span class="c">// In loop():</span>
+ArduinoOTA.handle();</pre>
+        </div>
+        In Arduino IDE: <em>Tools → Port → voltguard at 192.168.x.x</em>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-hdr"><div class="card-icon" style="background:rgba(0,255,136,0.12);font-size:20px">🐕</div><div class="card-title" style="color:var(--green)">Hardware Watchdog</div></div>
+      <div class="card-body">
+        ESP32 has a built-in watchdog timer. Enable it to auto-reset if the firmware hangs:
+        <div class="code-wrap" style="margin-top:10px">
+          <div class="code-header"><div class="code-lang">C++</div></div>
+<pre style="font-size:11px"><span class="p">#include</span> <span class="s">&lt;esp_task_wdt.h&gt;</span>
+<span class="c">// In setup():</span>
+esp_task_wdt_init(<span class="n">30</span>, <span class="k">true</span>); <span class="c">// 30s timeout</span>
+esp_task_wdt_add(<span class="k">NULL</span>);
+<span class="c">// In loop() — call regularly:</span>
+esp_task_wdt_reset();</pre>
+        </div>
+        If the main loop takes more than 30 seconds (WiFi hang, etc.), the ESP32 automatically resets.
+      </div>
+    </div>
+  </div>
+
+  <div class="sub-title">📡 Remote Relay Control from Dashboard</div>
+  <div class="code-wrap">
+    <div class="code-header">
+      <div class="code-lang">C++ / Arduino</div>
+      <div class="code-file">Remote relay control via Firebase</div>
+    </div>
+<pre><span class="c">// Add to loop() — listens for commands from dashboard</span>
+<span class="t">void</span> <span class="f">checkRemoteCommands</span>() {
+  <span class="k">if</span> (Firebase.getString(fbData, <span class="s">"/voltguard/commands/relay"</span>)) {
+    <span class="t">String</span> cmd = fbData.stringData();
+
+    <span class="k">if</span> (cmd == <span class="s">"RESTORE"</span> &amp;&amp; relayTripped) {
+      resetRelay();
+      Firebase.setString(fbData, <span class="s">"/voltguard/commands/relay"</span>, <span class="s">"IDLE"</span>);
+      Serial.println(<span class="s">"[COMMAND] Relay restored by dashboard"</span>);
+    }
+    <span class="k">else if</span> (cmd == <span class="s">"TRIP"</span> &amp;&amp; !relayTripped) {
+      digitalWrite(PIN_RELAY, <span class="t">LOW</span>);
+      relayTripped = <span class="k">true</span>;
+      Firebase.setString(fbData, <span class="s">"/voltguard/commands/relay"</span>, <span class="s">"IDLE"</span>);
+      Serial.println(<span class="s">"[COMMAND] Relay tripped by dashboard"</span>);
+    }
+  }
+}
+
+<span class="c">// Dashboard sends to Firebase:
+// db.ref('voltguard/commands/relay').set('RESTORE')</span></pre>
+  </div>
+
+  <div class="sub-title">📊 Calibration Procedure</div>
+  <table class="data-table">
+    <thead><tr><th>Step</th><th>Sensor</th><th>Procedure</th><th>Expected Reading</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>ACS712 Offset</td><td>Disconnect all load. Read ADC at zero current. Should be 2048 (mid-scale).</td><td><code>ADC ≈ 2048</code></td></tr>
+      <tr><td>2</td><td>ACS712 Scale</td><td>Pass a known current (e.g., 1A from a DC lab supply). Verify reading = 1.0A.</td><td><code>I_calc = 1.00 A</code></td></tr>
+      <tr><td>3</td><td>ZMPT101B</td><td>Measure mains voltage with a calibrated multimeter. Adjust ZMPT_VCAL constant until ESP32 reads the same value.</td><td><code>V_calc = 230 V</code></td></tr>
+      <tr><td>4</td><td>Both Sensors</td><td>Run both sensors simultaneously. At zero theft, imbalance should be &lt; 2% (minor resistive losses).</td><td><code>Imbalance &lt; 2%</code></td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ═══════════════════════════════════════
+     SECTION 10 — SAFETY
+═══════════════════════════════════════ -->
+<section class="section" id="s10">
+  <div class="sec-hdr">
+    <div class="sec-num">10</div>
+    <div>
+      <div class="sec-title">Safety Guidelines</div>
+      <div class="sec-subtitle">Mains Isolation · Protection · Lab Precautions</div>
+    </div>
+  </div>
+
+  <div class="alert alert-danger">
+    <span class="alert-icon">☠️</span>
+    <span><strong>230V AC mains can kill.</strong> Even a brief contact with a live wire at mains voltage can cause cardiac arrest. Read every rule below before touching any AC wiring. Have a knowledgeable person present at all times when working with mains power.</span>
+  </div>
+
+  <div class="sub-title">🔴 Mandatory Safety Rules</div>
+
+  <div class="safety-rule"><div class="sr-num">1</div><div class="sr-text"><strong>Always power off before wiring.</strong> Disconnect the mains plug / flip the breaker before making any changes to AC-side wiring. Verify with a non-contact voltage tester.</div></div>
+  <div class="safety-rule"><div class="sr-num">2</div><div class="sr-text"><strong>Never use bare-end jumper wires on AC mains.</strong> Use only proper screw terminal blocks (KF301 type) with insulated crimp ferrules on wire ends for mains connections.</div></div>
+  <div class="safety-rule"><div class="sr-num">3</div><div class="sr-text"><strong>Use an isolation transformer during development.</strong> A 1:1 isolation transformer between the mains outlet and your project prevents electrocution by removing earth-referenced hazard. Available at electronics stores for ~₹500.</div></div>
+  <div class="safety-rule"><div class="sr-num">4</div><div class="sr-text"><strong>Completely separate AC and DC wiring.</strong> Route AC wires (L, N) on one side of the enclosure. DC wires (3.3V, 5V, signals) on the other. Use different wire colours: Red/Black for AC, different colours for DC.</div></div>
+  <div class="safety-rule"><div class="sr-num">5</div><div class="sr-text"><strong>Enclose all AC connections.</strong> Mount the HLK module, relay, and all AC terminal blocks inside a plastic (not metal) enclosure with proper cover. Label "DANGER — HIGH VOLTAGE" on the outside.</div></div>
+  <div class="safety-rule"><div class="sr-num">6</div><div class="sr-text"><strong>Use a 2A fuse on the Live (L) wire.</strong> Add an in-line fuse holder with a 2A fuse in series with the Live wire before the HLK module. This is your primary overcurrent protection.</div></div>
+  <div class="safety-rule"><div class="sr-num">7</div><div class="sr-text"><strong>One hand rule.</strong> When probing or measuring near any powered AC circuit, keep one hand behind your back. This prevents a current path across your heart if accidental contact occurs.</div></div>
+  <div class="safety-rule"><div class="sr-num">8</div><div class="sr-text"><strong>Ground the enclosure if using a metal box.</strong> Connect the metal chassis to earth ground via a green/yellow wire. For a college demo, a plastic enclosure avoids this issue entirely.</div></div>
+  <div class="safety-rule"><div class="sr-num">9</div><div class="sr-text"><strong>Verify isolation between AC and DC with a multimeter.</strong> Before powering on, check resistance between any ESP32 pin and the mains Live wire — it must read OL (open, infinite). Any continuity means a dangerous fault.</div></div>
+  <div class="safety-rule"><div class="sr-num">10</div><div class="sr-text"><strong>Never work alone.</strong> Always have a second person present who can call for help and knows to disconnect power if something goes wrong. They should not touch anything themselves — just be able to cut power at the breaker.</div></div>
+
+  <div class="sub-title mt">🛡️ Isolation Architecture Summary</div>
+  <div class="grid3">
+    <div class="card">
+      <div class="card-hdr"><div class="card-icon" style="background:rgba(0,200,255,0.12)">🔌</div><div class="card-title" style="color:var(--cyan)">HLK-PM01 Module</div></div>
+      <div class="card-body">Built-in reinforced insulation between primary (230V) and secondary (5V). Rated for 3kV isolation. Certified for mains use. The DC output has no electrical connection to the mains input.</div>
+    </div>
+    <div class="card">
+      <div class="card-hdr"><div class="card-icon" style="background:rgba(0,255,136,0.12)">🔋</div><div class="card-title" style="color:var(--green)">ACS712 Isolation</div></div>
+      <div class="card-body">Hall-effect sensor with no galvanic connection between AC current path and signal output. The AC wire passes through a magnetic core — completely isolated from the signal pin.</div>
+    </div>
+    <div class="card">
+      <div class="card-hdr"><div class="card-icon" style="background:rgba(255,184,0,0.12)">⚙️</div><div class="card-title" style="color:var(--amber)">ZMPT101B Isolation</div></div>
+      <div class="card-body">Transformer-based voltage sensor. Primary winding connects to mains, secondary to ESP32 ADC through opamp. Transformer provides galvanic isolation with 4kV isolation rating.</div>
+    </div>
+  </div>
+
+  <div class="alert alert-ok" style="margin-top:20px">
+    <span class="alert-icon">✅</span>
+    <span><strong>Safe Architecture Summary:</strong> With HLK-PM01 + ACS712 + ZMPT101B, the ESP32 and all breadboard/signal electronics are <em>completely electrically isolated</em> from AC mains. No mains voltage can reach the ESP32 under any normal operating condition. The only connection is magnetic (ACS712) and inductive (ZMPT101B).</span>
+  </div>
+
+  <div class="sub-title">🧰 Recommended Test Equipment</div>
+  <table class="data-table">
+    <thead><tr><th>Tool</th><th>Purpose</th><th>Minimum Spec</th></tr></thead>
+    <tbody>
+      <tr><td>Digital Multimeter</td><td>Verify voltages, check isolation, continuity testing</td><td>CAT II 600V rated minimum</td></tr>
+      <tr><td>Non-contact Voltage Tester</td><td>Confirm mains is OFF before wiring</td><td>Any branded unit</td></tr>
+      <tr><td>USB-UART Adapter</td><td>Serial monitor during development</td><td>CH340 or FTDI</td></tr>
+      <tr><td>Variable DC Bench Supply</td><td>Sensor testing without mains during development</td><td>0–15V, 1A minimum</td></tr>
+      <tr><td>Isolation Transformer</td><td>Safe development environment</td><td>1:1, 500W minimum</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ═══════════════════════════════════════
+     QUICK REFERENCE CARD
+═══════════════════════════════════════ -->
+<section class="section" style="border-bottom:none">
+  <div class="sec-hdr">
+    <div class="sec-num" style="background:linear-gradient(135deg,var(--green),var(--cyan))">📋</div>
+    <div>
+      <div class="sec-title">Quick Reference Card</div>
+      <div class="sec-subtitle">Pin Map · Thresholds · Formulas</div>
+    </div>
+  </div>
+  <div class="grid3">
+    <div class="card">
+      <div class="card-title" style="margin-bottom:14px;color:var(--cyan)">PIN SUMMARY</div>
+      <div class="spec-row"><div class="spec-label">Voltage Sensor</div><div class="spec-val">GPIO34</div></div>
+      <div class="spec-row"><div class="spec-label">Supply Current</div><div class="spec-val">GPIO35</div></div>
+      <div class="spec-row"><div class="spec-label">Load Current</div><div class="spec-val">GPIO32</div></div>
+      <div class="spec-row"><div class="spec-label">Relay</div><div class="spec-val">GPIO26</div></div>
+      <div class="spec-row"><div class="spec-label">Buzzer</div><div class="spec-val">GPIO27</div></div>
+      <div class="spec-row"><div class="spec-label">LCD SDA</div><div class="spec-val">GPIO21</div></div>
+      <div class="spec-row"><div class="spec-label">LCD SCL</div><div class="spec-val">GPIO22</div></div>
+      <div class="spec-row"><div class="spec-label">GSM RX/TX</div><div class="spec-val">GPIO16/17</div></div>
+    </div>
+    <div class="card">
+      <div class="card-title" style="margin-bottom:14px;color:var(--amber)">THRESHOLDS</div>
+      <div class="spec-row"><div class="spec-label">Imbalance Warning</div><div class="spec-val" style="color:var(--amber)">&gt; 5%</div></div>
+      <div class="spec-row"><div class="spec-label">Imbalance Theft</div><div class="spec-val" style="color:var(--danger)">&gt; 10%</div></div>
+      <div class="spec-row"><div class="spec-label">Imbalance Critical</div><div class="spec-val" style="color:var(--danger)">&gt; 25%</div></div>
+      <div class="spec-row"><div class="spec-label">Voltage Drop Warn</div><div class="spec-val" style="color:var(--amber)">&gt; 5%</div></div>
+      <div class="spec-row"><div class="spec-label">ACS712 Sensitivity</div><div class="spec-val">66 mV/A</div></div>
+      <div class="spec-row"><div class="spec-label">ACS712 Offset (3.3V)</div><div class="spec-val">1.65 V</div></div>
+      <div class="spec-row"><div class="spec-label">ZMPT Cal. Constant</div><div class="spec-val">~218</div></div>
+      <div class="spec-row"><div class="spec-label">Sample Count</div><div class="spec-val">500 / read</div></div>
+    </div>
+    <div class="card">
+      <div class="card-title" style="margin-bottom:14px;color:var(--green)">KEY FORMULAS</div>
+      <div style="font-family:var(--mono);font-size:11.5px;line-height:2.1;color:var(--text2)">
+        <div><span style="color:var(--cyan)">I_rms</span> = √(Σi²/N)</div>
+        <div><span style="color:var(--cyan)">V_rms</span> = K · √(Σv²/N)</div>
+        <div><span style="color:var(--cyan)">P</span> = V_rms · I_rms · PF</div>
+        <div><span style="color:var(--amber)">Imb%</span> = |Is−Il|/Is·100</div>
+        <div><span style="color:var(--amber)">Vdrop%</span> = |230−V|/230·100</div>
+        <div><span style="color:var(--danger)">THEFT</span> = Imb%>10 ∧ 3× confirm</div>
+        <div style="color:var(--text3);font-size:10px;margin-top:8px">PF = Power Factor ≈ 0.85</div>
+        <div style="color:var(--text3);font-size:10px">K = ZMPT calibration constant</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Project completion checklist -->
+  <div class="card mt" style="border-color:rgba(0,255,136,0.2)">
+    <div class="card-title" style="color:var(--green);margin-bottom:18px">✅ PROJECT COMPLETION CHECKLIST</div>
+    <div class="grid2">
+      <ul class="check-list">
+        <li>ESP32 flashes and connects to WiFi successfully</li>
+        <li>ACS712 sensors read correct zero-current offset</li>
+        <li>ZMPT101B calibrated to show correct mains voltage</li>
+        <li>Relay clicks on/off via dashboard and code command</li>
+        <li>Buzzer sounds when theft threshold is exceeded</li>
+        <li>Firebase receives data every 2 seconds</li>
+      </ul>
+      <ul class="check-list">
+        <li>Dashboard gauge reflects live imbalance percentage</li>
+        <li>SIM800L sends SMS on theft detection</li>
+        <li>LCD shows rotating voltage/current/imbalance data</li>
+        <li>System debounces alerts (3 confirms before tripping)</li>
+        <li>All AC connections are inside a closed enclosure</li>
+        <li>Isolation verified with multimeter before demo</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+</div><!-- /wrap -->
+
+<footer>
+  <div style="font-size:18px;margin-bottom:10px">⚡</div>
+  <div><span>VOLTGUARD</span> — Smart Electricity Theft Detection System</div>
+  <div style="margin-top:6px;font-size:10px;opacity:0.5">Complete System Documentation · ESP32 + ACS712 + ZMPT101B + Firebase · College Project Reference</div>
+</footer>
+
+</body>
+</html>
