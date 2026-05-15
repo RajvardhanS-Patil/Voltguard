@@ -1,0 +1,42 @@
+{
+  "expo": {
+    "name": "VOLTEX",
+    "slug": "voltex-theft-detection",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "dark",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#111827"
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": false,
+      "bundleIdentifier": "com.voltex.theftdetection"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#111827"
+      },
+      "package": "com.voltex.theftdetection",
+      "versionCode": 1,
+      "statusBarColor": "#111827"
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "plugins": [
+      "expo-font"
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "e10c839e-1d41-43a3-9574-a0c65c46549d"
+      }
+    }
+  }
+}
